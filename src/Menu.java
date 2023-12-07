@@ -182,8 +182,4 @@ public class Menu {
         System.out.println(floristShop);
     }
 
-    public static void methodNotImplemented(int methodNumber) {
-        System.out.println("Método no implementado " + methodNumber + ".");
-    }
-
 }
