@@ -16,7 +16,7 @@ public class Menu {
                     case 1:
                         createFloristShop(floristShops);
                         break;
-                    case 2:
+                    case 2: // TODO Ernesto
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -25,7 +25,7 @@ public class Menu {
                             floristShop.addTree(floristShop.getStock());
                         }
                         break;
-                    case 3:
+                    case 3: // TODO Ernesto
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -34,7 +34,7 @@ public class Menu {
                             floristShop.addFlower(floristShop.getStock());
                         }
                         break;
-                    case 4:
+                    case 4: // TODO Ernesto
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -43,7 +43,7 @@ public class Menu {
                             floristShop.addDecoration(floristShop.getStock());
                         }
                         break;
-                    case 5:
+                    case 5: // TODO Ernesto
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
