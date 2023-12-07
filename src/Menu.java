@@ -52,7 +52,7 @@ public class Menu {
                             floristShop.getShopStock(floristShop.getStock());
                         }
                         break;
-                    case 6:
+                    case 6:  // TODO Juanma
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -61,7 +61,7 @@ public class Menu {
                             floristShop.removeTree(floristShop.getStock());
                         }
                         break;
-                    case 7:
+                    case 7: // TODO juanma
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -70,7 +70,7 @@ public class Menu {
                             floristShop.removeFlower(floristShop.getStock());
                         }
                         break;
-                    case 8:
+                    case 8:  // TODO Juanma
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -79,7 +79,7 @@ public class Menu {
                             floristShop.removeDecoration(floristShop.getStock());
                         }
                         break;
-                    case 9:
+                    case 9:  // TODO  Juanma
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
