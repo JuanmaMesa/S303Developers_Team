@@ -22,6 +22,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
+                        	
                             floristShop.addTree(floristShop.getStock());
                         }
                         break;
@@ -58,7 +59,12 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.removeTree(floristShop.getStock());
+                        	Product producto = floristShop.findProduct(floristShop.getStock(), "Tree");
+                        	if(producto != null) {
+                        		floristShop.removeTree(producto);
+                        	}else {
+                        		System.out.println("Arbol no encontrado en el Stock");
+                        	}
                         }
                         break;
                     case 7: // TODO juanma Sanchez

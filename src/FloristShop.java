@@ -35,9 +35,12 @@ public class FloristShop {
         this.tickets = tickets;
     }
 
-    public static Product findProduct(ArrayList<Product> stock){
-        //TODO buscar producto en stock
-        return null;
+    public static Product findProduct(ArrayList<Product> stock, String name){
+        return stock.stream()
+        	.filter(n -> n.getName().equalsIgnoreCase(name))
+        	.findFirst()
+        	.orElse(null);
+      
     }
 
     public void addTicket(Ticket ticket){
@@ -64,9 +67,14 @@ public class FloristShop {
         System.out.println("getShopStock()");
     }
 
-    public void removeTree(ArrayList<Product> stock){
-        //TODO quitar arbol de array
-        System.out.println("removeTree()");
+    public void removeTree(Product producto){
+    	if(producto instanceof Tree) {
+    		stock.remove(producto);
+    		System.out.println("arbol eliminado Correctamente");
+    	}else {
+    		System.out.println("Stock:"+ toString());
+    		System.out.println("El producto asignado no es un arbol");
+    	}
     }
 
     public void removeFlower(ArrayList<Product> stock){
