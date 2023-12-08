@@ -47,9 +47,9 @@ public class FloristShop {
         //TODO añadir ticket a array
     }
 
-    public void addTree(ArrayList<Product> stock){
-        //TODO añadir arbol a array
-        System.out.println("addTree()");
+    public void addTree(Product producto){
+        stock.add(producto);
+        System.out.println("add coorectamente");
     }
 
     public void addFlower(ArrayList<Product> stock){
@@ -70,21 +70,31 @@ public class FloristShop {
     public void removeTree(Product producto){
     	if(producto instanceof Tree) {
     		stock.remove(producto);
-    		System.out.println("arbol eliminado Correctamente");
+    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
     	}else {
-    		System.out.println("Stock:"+ toString());
     		System.out.println("El producto asignado no es un arbol");
     	}
     }
 
-    public void removeFlower(ArrayList<Product> stock){
-        //TODO quitar flor de array
-        System.out.println("removeFlower()");
+    public void removeFlower(Product producto){
+        if(producto instanceof Flower) {
+        	stock.remove(producto);
+        	System.out.println(producto.getName()+" ha sido eliminado Correctamente");
+        }else {
+        	System.out.println("El producto asignado no es una flor");
+        	
+        }
+       
     }
 
-    public void removeDecoration(ArrayList<Product> stock) {
-        //TODO quitar decoración de array
-        System.out.println("removeDecoration()");
+    public void removeDecoration(Product producto) {
+    	if(producto instanceof Tree) {
+    		stock.remove(producto);
+    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
+    	}else {
+    		System.out.println("El producto asignado no es una decoracion");
+    	}
+    }
     }
 
     public void getShopStockWithQuantity(ArrayList<Product> stock){

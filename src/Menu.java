@@ -23,7 +23,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else{
                         	
-                            floristShop.addTree(floristShop.getStock());
+                            //floristShop.addTree(floristShop.getStock());
                         }
                         break;
                     case 3:
@@ -59,10 +59,12 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
+                        	floristShop.toString();
                         	Product producto = floristShop.findProduct(floristShop.getStock(), "Tree");
                         	if(producto != null) {
                         		floristShop.removeTree(producto);
                         	}else {
+                        		System.out.println(floristShop.toString());
                         		System.out.println("Arbol no encontrado en el Stock");
                         	}
                         }
