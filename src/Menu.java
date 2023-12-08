@@ -176,10 +176,33 @@ public class Menu {
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
+            floristShops.add(floristShop);
         } else{
             System.out.println("Ya existe una floristería con ese nombre.");
         }
         System.out.println(floristShop);
+    }
+
+    public static byte selectMaterialMenu() {
+        byte option;
+
+        do {
+            System.out.println("Selecciona el material de la decoración:");
+            System.out.println("1. Madera.");
+            System.out.println("2. Plástico.");
+
+            try {
+                option = sc.nextByte();
+                sc.nextLine();
+                if (option < 1 || option > 2) {
+                    System.out.println("Opción no válida");
+                }
+            } catch (InputMismatchException e) {
+                throw e;
+            }
+        } while (option < 1 || option > 2);
+
+        return option;
     }
 
 }
