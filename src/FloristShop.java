@@ -88,14 +88,14 @@ public class FloristShop {
     }
 
     public void removeDecoration(Product producto) {
-    	if(producto instanceof Tree) {
+    	if(producto instanceof Decoration) {
     		stock.remove(producto);
     		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
     	}else {
     		System.out.println("El producto asignado no es una decoracion");
     	}
     }
-    }
+    
 
     public void getShopStockWithQuantity(ArrayList<Product> stock){
         //TODO print stock con cantidad
