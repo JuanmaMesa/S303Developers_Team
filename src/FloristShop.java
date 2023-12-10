@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import javax.management.ObjectInstance;
 
 public class FloristShop {
     private String name;
@@ -35,7 +38,7 @@ public class FloristShop {
         this.tickets = tickets;
     }
 
-    public static Product findProduct(ArrayList<Product> stock, String name){
+    public  Product findProduct(ArrayList<Product> stock, String name){
         return stock.stream()
         	.filter(n -> n.getName().equalsIgnoreCase(name))
         	.findFirst()
@@ -49,7 +52,6 @@ public class FloristShop {
 
     public void addTree(Product producto){
         stock.add(producto);
-        System.out.println("add coorectamente");
     }
 
     public void addFlower(ArrayList<Product> stock){
@@ -97,9 +99,35 @@ public class FloristShop {
     }
     
 
-    public void getShopStockWithQuantity(ArrayList<Product> stock){
-        //TODO print stock con cantidad
-        System.out.println("getShopStockWithQuantity()");
+    public void getShopStockWithQuantity(){
+    	int indiceTree = 0;
+    	int indiceFlower = 0;
+    	int indiceDecoration = 0;
+    	
+    	for(Product p : stock) {
+    		if(p instanceof Tree) {
+    			indiceTree++;
+    			
+    		}if(p instanceof Flower) {
+        			
+        			indiceFlower++;
+    		
+    		}if(p instanceof Decoration) {
+        	
+        			indiceDecoration++;
+        			
+    		}
+    	}
+    	
+    	System.out.println("--- STOCK --- ");
+    	System.out.println("--- Total arboles --- \n "+ indiceTree);
+    	System.out.println("--- Total flores --- \n "+ indiceFlower);
+    	System.out.println("--- Total decorados --- \n "+ indiceDecoration);
+    	
+   
+    	
+    	
+		
     }
 
     public void getTotalValue(ArrayList<Product> stock){

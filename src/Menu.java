@@ -104,7 +104,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getShopStockWithQuantity(floristShop.getStock());
+                            floristShop.getShopStockWithQuantity();
                         }
                         break;
                     case 10:
