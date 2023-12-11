@@ -1,13 +1,18 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
-    static Scanner sc = new Scanner(System.in);
+    
     public static void main(String[] args) {
-       ArrayList<FloristShop> floristShops = new ArrayList<>();
+    	Data data = new Data();
+        
+        data.loadStocks();
+        data.loadTicket();
+        data.loadProducts();
+        data.loadShop();
+        ArrayList<FloristShop> floristShops = data.getFloristerias();
 
-
-        //Pruebas instancia objetos
+       	
+        /*Pruebas instancia objetos
         FloristShop floristShop = new FloristShop("Floristeria");
         System.out.println(floristShop);
         floristShops.add(floristShop);
@@ -20,8 +25,11 @@ public class Main {
         Flower flower = new Flower("Flower", 10.5, "Red");
         System.out.println(flower);
         Decoration decoration = new Decoration("Decoraion", 5.5, "Wood");
-        System.out.println(decoration);
-
+        System.out.println(decoration);*/
+        for (FloristShop f: floristShops) {
+        	ArrayList<Product> stocks = f.getStock();
+        	stocks.forEach((s) -> System.out.println(s.getName()));
+        }
         Menu.getMainMenu(floristShops);
 
     }
@@ -36,12 +44,6 @@ public class Main {
             i++;
         }
         return floristShop;
-    }
-
-    public static String nameFlowerShop (){
-        System.out.println("Introduce el nombre de la floristeria:");
-        String inputName = sc.nextLine();
-        return inputName;
     }
 
 }

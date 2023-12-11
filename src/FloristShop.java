@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class FloristShop {
+	
     private String name;
     ArrayList<Product> stock;
     ArrayList<Ticket> tickets;
@@ -9,6 +10,12 @@ public class FloristShop {
         this.name = name;
         this.stock = new ArrayList<Product>();;
         this.tickets = new ArrayList<Ticket>();
+    }
+    
+    public FloristShop(String name, ArrayList<Product> stock, ArrayList<Ticket> tickets) {
+    	this.name = name;
+    	this.stock = stock;
+    	this.tickets = tickets;
     }
 
     public String getName() {
@@ -23,17 +30,11 @@ public class FloristShop {
         return stock;
     }
 
-    public void setStock(ArrayList<Product> stock) {
-        this.stock = stock;
-    }
 
     public ArrayList<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
-    }
 
     public static Product findProduct(ArrayList<Product> stock){
         //TODO buscar producto en stock

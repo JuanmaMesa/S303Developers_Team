@@ -12,22 +12,17 @@ public class Ticket {
         this.floristShop = floristShop;
         this.products = new ArrayList<Product>();
     }
-
-    public static int getLastId() {
-        return lastId;
-    }
-
-    public static void setLastId(int lastId) {
-        Ticket.lastId = lastId;
+    
+    public Ticket(int id, ArrayList<Product> products, double totalPrice) {
+    	this.id = id;
+    	this.products = products;
+    	this.totalPrice = totalPrice;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public FloristShop getFloristShop() {
         return floristShop;
