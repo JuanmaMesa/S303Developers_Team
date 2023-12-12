@@ -3,13 +3,11 @@ import java.util.ArrayList;
 public class Ticket {
     private static int lastId = 0;
     private int id;
-    private FloristShop floristShop;
     private ArrayList<Product> products;
     private double totalPrice = 0;
 
-    public Ticket(FloristShop floristShop) {
+    public Ticket() {
         this.id = ++lastId;
-        this.floristShop = floristShop;
         this.products = new ArrayList<Product>();
     }
     
@@ -21,15 +19,6 @@ public class Ticket {
 
     public int getId() {
         return id;
-    }
-
-
-    public FloristShop getFloristShop() {
-        return floristShop;
-    }
-
-    public void setFloristShop(FloristShop floristShop) {
-        this.floristShop = floristShop;
     }
 
     public ArrayList<Product> getProducts() {
@@ -44,23 +33,22 @@ public class Ticket {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+
+    public void addProduct(Product p){
+        // TODO añadir productos a ticket
+    	this.products.add(p);
     }
 
-    public static void addProduct(){
-        // TODO añadir productos a ticket
-    }
+    public void calculateFinalPrice(){
+        // TODO calcula precio ticket
+    	this.totalPrice = this.products.stream().mapToDouble(Product::getPrice).sum();
 
-    public static void calculateFinalPrice(){
-        // TODO añadir productos a ticket
     }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", floristShop=" + floristShop.getName() +
                 ", products=" + products +
                 ", totalPrice=" + totalPrice +
                 '}';

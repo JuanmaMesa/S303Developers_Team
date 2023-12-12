@@ -8,7 +8,7 @@ public class FloristShop {
 
     public FloristShop(String name) {
         this.name = name;
-        this.stock = new ArrayList<Product>();;
+        this.stock = new ArrayList<Product>();
         this.tickets = new ArrayList<Ticket>();
     }
     
@@ -85,24 +85,63 @@ public class FloristShop {
         System.out.println("getShopStockWithQuantity()");
     }
 
-    public void getTotalValue(ArrayList<Product> stock){
+    public double getTotalValue(ArrayList<Product> stock){
         //TODO valor total stock
-        System.out.println("getTotalValue()");
+    	double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
+    	
+        return totalValue;
     }
 
-    public void createPurchaseTicket(ArrayList<Ticket> tickets){
+    public void createPurchaseTicket(ArrayList<Product> stock){
         //TODO crear nuevo ticket
-        System.out.println("createPurchaseTicket()");
+    	byte option= -1;
+    	String yesNo = "";
+    	boolean endPurchase = false;
+    	Ticket ticket = new Ticket();
+    	do {
+    		System.out.println("Productos en stock: ");
+        	for (int i=1; i<=stock.size(); i++) {
+        		System.out.println(i+". "+stock.get(i-1).getName());
+        	}
+        	do {	
+        		option = Input.llegirByte("Qué objeto quieres comprar?: ");
+        		if (option < 1 || option>stock.size()) {
+        			System.out.println("Opcion no valida\n");
+        		}
+        	}while (option < 1 || option>stock.size());
+        	
+        	ticket.addProduct(stock.get(option-1));
+        	System.out.println("Producto anyadido\n");
+    		do {
+    			yesNo = Input.llegirString("Quieres seguir comprando? (S/N): ");
+        	}while(!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+
+        	if (yesNo.equalsIgnoreCase("n")) {
+        		endPurchase = true;
+        	}
+	
+    	}while (endPurchase == false);
+    	ticket.calculateFinalPrice();
+    	this.tickets.add(ticket);
+
     }
 
     public void getPurchaseTickets(ArrayList<Ticket> tickets){
         //TODO mostar lista tickets antiguos
-        System.out.println("getPurchaseTickets()");
+    	
+    	for (Ticket t: tickets) {
+    		System.out.println("Ticket ID: "+t.getId()+" tiene los siguientes productos: ");
+    		t.getProducts().forEach((p) -> System.out.println("- "+p.getName()));
+    		System.out.println("Precio Total de la compra: " + t.getTotalPrice()+ " €\n");
+    	}
+       
     }
 
-    public void getSalesProfits(ArrayList<Ticket> tickets){
+    public double getSalesProfits(ArrayList<Ticket> tickets){
         //TODO ver ganancias tickets
-        System.out.println("getSalesProfits()");
+    	double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
+    	
+        return totalEarns;
     }
 
     @Override

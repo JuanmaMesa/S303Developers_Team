@@ -94,7 +94,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getTotalValue(floristShop.getStock());
+                           System.out.println(floristShop.getTotalValue(floristShop.getStock()));
                         }
                         break;
                     case 11:
@@ -103,7 +103,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.createPurchaseTicket(floristShop.getTickets());
+                            floristShop.createPurchaseTicket(floristShop.getStock());
                         }
                         break;
                     case 12:
@@ -121,7 +121,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getSalesProfits(floristShop.getTickets());
+                           System.out.println(floristShop.getSalesProfits(floristShop.getTickets()));
                         }
                         break;
                     case 0:
@@ -170,7 +170,7 @@ public class Menu {
     }
 
     public static void createFloristShop(ArrayList<FloristShop> floristShops) {
-        String inputName = Input.llegirString("Introduce el nombre de la florister�a: ");
+        String inputName = Input.llegirString("Introduce el nombre de la florister�a: ");
         FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
