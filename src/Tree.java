@@ -1,7 +1,7 @@
 public class Tree extends Product{
     private double height;
 
-    public Tree(String name, Double price, double height) {
+    public Tree(String name, double price, double height) {
         super(name, price);
         this.height = height;
     }

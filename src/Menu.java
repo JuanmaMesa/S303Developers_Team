@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Menu {
-    static Scanner sc = new Scanner(System.in);
+    
 
     public static void getMainMenu(ArrayList<FloristShop> floristShops) {
         boolean exit = false;
-        String inputName;
+        String shopName = Input.llegirString("Introduce el nombre de la floristeria: ");
         FloristShop floristShop;
+
 
         do {
             try {
@@ -16,9 +16,11 @@ public class Menu {
                     case 1:
                         createFloristShop(floristShops);
                         break;
+
                     case 2: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -26,36 +28,44 @@ public class Menu {
                             //floristShop.addTree(floristShop.getStock());
                         }
                         break;
+
                     case 3: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.addFlower(floristShop.getStock());
                         }
                         break;
+
                     case 4: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.addDecoration(floristShop.getStock());
                         }
                         break;
+
                     case 5: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.getShopStock(floristShop.getStock());
                         }
                         break;
+
                     case 6:  // TODO Juanma Sanchez
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -67,9 +77,11 @@ public class Menu {
                         	}
                         }
                         break;
+
                     case 7: // TODO juanma Sanchez
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -84,9 +96,11 @@ public class Menu {
                    
                     
                         break;
+
                     case 8:  // TODO Juanma Sanchez
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -98,9 +112,11 @@ public class Menu {
                         	}
                         } 
                         break;
+
                     case 9:  // TODO  Juanma Sanchez
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -108,26 +124,26 @@ public class Menu {
                         }
                         break;
                     case 10:
-                        inputName = Main.nameFlowerShop();
-                        floristShop = Main.findFlowerShop(floristShops, inputName);
+                        
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getTotalValue(floristShop.getStock());
+                           System.out.println(floristShop.getTotalValue(floristShop.getStock()));
                         }
                         break;
                     case 11:
-                        inputName = Main.nameFlowerShop();
-                        floristShop = Main.findFlowerShop(floristShops, inputName);
+                        
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.createPurchaseTicket(floristShop.getTickets());
+                            floristShop.createPurchaseTicket(floristShop.getStock());
                         }
                         break;
                     case 12:
-                        inputName = Main.nameFlowerShop();
-                        floristShop = Main.findFlowerShop(floristShops, inputName);
+                        
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
@@ -135,12 +151,12 @@ public class Menu {
                         }
                         break;
                     case 13:
-                        inputName = Main.nameFlowerShop();
-                        floristShop = Main.findFlowerShop(floristShops, inputName);
+                        
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getSalesProfits(floristShop.getTickets());
+                           System.out.println(floristShop.getSalesProfits(floristShop.getTickets()));
                         }
                         break;
                     case 0:
@@ -149,8 +165,7 @@ public class Menu {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error: Ingrese un valor válido (número entero).");
-                sc.nextLine();
+                Input.llegirString("Error: Ingrese un valor válido (número entero): ");
             }
         } while (!exit);
     }
@@ -176,8 +191,8 @@ public class Menu {
             System.out.println("0. Salir de la aplicación.\n");
 
             try {
-                option = sc.nextByte();
-                sc.nextLine();
+                option = Input.llegirByte("Introduce una opcion (1-13): ");
+                Input.input();
                 if (option < 0 || option > 13) {
                     System.out.println("Opción no válida");
                 }
@@ -190,7 +205,7 @@ public class Menu {
     }
 
     public static void createFloristShop(ArrayList<FloristShop> floristShops) {
-        String inputName = Main.nameFlowerShop();
+        String inputName = Input.llegirString("Introduce el nombre de la florister�a: ");
         FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
