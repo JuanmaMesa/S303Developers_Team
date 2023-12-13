@@ -50,25 +50,25 @@ public class FloristShop {
 
     public void addTicket(Ticket ticket){
         //TODO añadir ticket a array
+        this.tickets.add(ticket);
+
     }
 
 
     public void addTree(ArrayList<Product> stock) {
-        System.out.println("Introduce el nombre del árbol:");
-        String nameTree = sc.nextLine();
+        String nameTree = Input.llegirString("Introduce el nombre del árbol:");
 
         double priceTree = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                System.out.println("Introduce el precio del árbol:");
-                priceTree = Double.parseDouble(sc.nextLine());
+                priceTree = Input.llegirDouble("Introduce el precio del árbol:");
                 if (priceTree >= 0) {
                     validPrice = true;
                 } else {
                     System.out.println("El precio debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
@@ -77,14 +77,13 @@ public class FloristShop {
         boolean validHeight = false;
         while (!validHeight) {
             try {
-                System.out.println("Introduce la altura del árbol:");
-                heightTree = Double.parseDouble(sc.nextLine());
+                heightTree = Input.llegirDouble("Introduce la altura del árbol:");
                 if (heightTree >= 0) {
                     validHeight = true;
                 } else {
                     System.out.println("La altura debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para la altura.");
             }
         }
@@ -96,15 +95,13 @@ public class FloristShop {
     }
 
     public void addFlower(ArrayList<Product> stock){
-        System.out.println("Introduce el nombre de la flor:");
-        String nameFlower = sc.nextLine();
+        String nameFlower = Input.llegirString("Introduce el nombre de la flor:");
 
         double priceFlower = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                System.out.println("Introduce el precio de la flor:");
-                priceFlower = Double.parseDouble(sc.nextLine());
+                priceFlower = Input.llegirDouble(("Introduce el precio de la flor:"));
                 if (priceFlower >= 0) {
                     validPrice = true;
                 } else {
@@ -115,8 +112,7 @@ public class FloristShop {
             }
         }
 
-        System.out.println("Introduce el color de la flor:");
-        String colorFlower = sc.nextLine();
+        String colorFlower = Input.llegirString("Introduce el color de la flor:");
         Flower flower = new Flower(nameFlower, priceFlower, colorFlower);
         stock.add(flower);
 
@@ -124,15 +120,13 @@ public class FloristShop {
     }
 
     public void addDecoration(ArrayList<Product> stock){
-        System.out.println("Introduce el nombre de la decoración:");
-        String nameDecoration = sc.nextLine();
+        String nameDecoration = Input.llegirString("Introduce el nombre de la decoración:");
 
         double priceDecoration = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                System.out.println("Introduce el precio de la decoración:");
-                priceDecoration = Double.parseDouble(sc.nextLine());
+                priceDecoration = Input.llegirDouble(("Introduce el precio de la decoración:"));
                 if (priceDecoration >= 0) {
                     validPrice = true;
                 } else {
@@ -144,7 +138,7 @@ public class FloristShop {
         }
 
         boolean exit = false;
-
+        //TODO Revisar entrada menu
         do {
             try {
                 switch (Menu.selectMaterialMenu()) {
@@ -241,7 +235,7 @@ public class FloristShop {
     public double getTotalValue(ArrayList<Product> stock){
         //TODO valor total stock
     	double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
-    	
+        // TODO sysout con totalValue
         return totalValue;
     }
 
@@ -253,6 +247,7 @@ public class FloristShop {
     	Ticket ticket = new Ticket();
     	do {
     		System.out.println("Productos en stock: ");
+            //TODO Linkar con stock de floristShop
         	for (int i=1; i<=stock.size(); i++) {
         		System.out.println(i+". "+stock.get(i-1).getName());
         	}
@@ -275,12 +270,13 @@ public class FloristShop {
 	
     	}while (endPurchase == false);
     	ticket.calculateFinalPrice();
-    	this.tickets.add(ticket);
+        addTicket(ticket);
+
 
     }
 
     public void getPurchaseTickets(ArrayList<Ticket> tickets){
-        //TODO mostar lista tickets antiguos
+        //TODO Linkar con stock de floristShop
     	
     	for (Ticket t: tickets) {
     		System.out.println("Ticket ID: "+t.getId()+" tiene los siguientes productos: ");
@@ -291,9 +287,8 @@ public class FloristShop {
     }
 
     public double getSalesProfits(ArrayList<Ticket> tickets){
-        //TODO ver ganancias tickets
     	double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
-    	
+        //TODO sysout totalEarns
         return totalEarns;
     }
 

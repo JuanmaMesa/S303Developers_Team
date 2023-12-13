@@ -45,11 +45,16 @@ public class Input{
 	
 
 	public static String llegirString(String msj) {
-	
 		System.out.print(msj);
 		String texto = input().nextLine();
 
 		return texto;
+	}
+
+	public static void cleanBuffer() {
+
+		input().nextLine();
+
 	}
 	
 
