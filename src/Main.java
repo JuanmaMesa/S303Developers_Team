@@ -35,8 +35,12 @@ public class Main {
         
         Decoration decoration = new Decoration("Decoraion", 5.5, "Wood");
         System.out.println(decoration);
-*/
-    
+
+        floristShop.getStock().add(tree);
+        floristShop.getStock().add(flower);
+        floristShop.getStock().add(decoration);
+
+
         Menu.getMainMenu(floristShops);
         System.out.println(floristShop.toString());
 

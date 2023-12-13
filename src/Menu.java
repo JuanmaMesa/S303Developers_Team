@@ -16,7 +16,7 @@ public class Menu {
                     case 1:
                         createFloristShop(floristShops);
                         break;
-                    case 2:
+                    case 2: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -26,7 +26,7 @@ public class Menu {
                             //floristShop.addTree(floristShop.getStock());
                         }
                         break;
-                    case 3:
+                    case 3: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -35,7 +35,7 @@ public class Menu {
                             floristShop.addFlower(floristShop.getStock());
                         }
                         break;
-                    case 4:
+                    case 4: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -44,7 +44,7 @@ public class Menu {
                             floristShop.addDecoration(floristShop.getStock());
                         }
                         break;
-                    case 5:
+                    case 5: // TODO Ernesto1
                         inputName = Main.nameFlowerShop();
                         floristShop = Main.findFlowerShop(floristShops, inputName);
                         if(floristShop == null){
@@ -195,6 +195,7 @@ public class Menu {
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
+            floristShops.add(floristShop);
         } else{
             System.out.println("Ya existe una floristería con ese nombre.");
         }
@@ -210,5 +211,28 @@ public static String readString(String message) {
 		return command;
 		
 	}
+
+    public static byte selectMaterialMenu() {
+        byte option;
+
+        do {
+            System.out.println("Selecciona el material de la decoración:");
+            System.out.println("1. Madera.");
+            System.out.println("2. Plástico.");
+
+            try {
+                option = sc.nextByte();
+                sc.nextLine();
+                if (option < 1 || option > 2) {
+                    System.out.println("Opción no válida");
+                }
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                throw e;
+            }
+        } while (option < 1 || option > 2);
+
+        return option;
+    }
 
 }
