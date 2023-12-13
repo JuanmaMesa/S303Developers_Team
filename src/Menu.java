@@ -16,76 +16,111 @@ public class Menu {
                     case 1:
                         createFloristShop(floristShops);
                         break;
-                    case 2:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 2: // TODO Ernesto1
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.addTree(floristShop.getStock());
+                        	
+                            //floristShop.addTree(floristShop.getStock());
                         }
                         break;
-                    case 3:
-                       
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 3: // TODO Ernesto1
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.addFlower(floristShop.getStock());
                         }
                         break;
-                    case 4:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 4: // TODO Ernesto1
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.addDecoration(floristShop.getStock());
                         }
                         break;
-                    case 5:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 5: // TODO Ernesto1
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
                             floristShop.getShopStock(floristShop.getStock());
                         }
                         break;
-                    case 6:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 6:  // TODO Juanma Sanchez
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.removeTree(floristShop.getStock());
+                        	Product producto = floristShop.findProduct(floristShop.getStock(),readString("Dime el nombre del arbol que quieres eliminiar"));
+                        	if(producto != null) {
+                        		floristShop.removeTree(producto);
+                        	}else {
+                        		System.out.println("Arbol no encontrado en el Stock");
+                        	}
                         }
                         break;
-                    case 7:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 7: // TODO juanma Sanchez
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.removeFlower(floristShop.getStock());
+                        	Product producto = floristShop.findProduct(floristShop.getStock(),readString("Dime el nombre de la flor que quieres eliminiar"));
+                        	if(producto != null) {
+                        		floristShop.removeFlower(producto);
+                        		
+                        	}else {
+                        		System.out.println("Flor no encontrada en el Stock");
+                        	}
                         }
+                   
+                    
                         break;
-                    case 8:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 8:  // TODO Juanma Sanchez
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.removeDecoration(floristShop.getStock());
-                        }
+                        	Product producto = floristShop.findProduct(floristShop.getStock(),readString("Dime el nombre del arbol que quieres eliminiar"));
+                        	if(producto != null) {
+                        		floristShop.removeDecoration(producto);
+                        	}else {
+                        		System.out.println("Decoracion no encontrada en el Stock");
+                        	}
+                        } 
                         break;
-                    case 9:
-                        
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                    case 9:  // TODO  Juanma Sanchez
+                        inputName = Main.nameFlowerShop();
+                        floristShop = Main.findFlowerShop(floristShops, inputName);
+
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            floristShop.getShopStockWithQuantity(floristShop.getStock());
+                            floristShop.getShopStockWithQuantity();
                         }
                         break;
                     case 10:
@@ -175,14 +210,44 @@ public class Menu {
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
+            floristShops.add(floristShop);
         } else{
             System.out.println("Ya existe una floristería con ese nombre.");
         }
         System.out.println(floristShop);
     }
+    
+public static String readString(String message) {
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println(message);
+		String command = input.nextLine();
+		
+		return command;
+		
+	}
 
-    public static void methodNotImplemented(int methodNumber) {
-        System.out.println("Método no implementado " + methodNumber + ".");
+    public static byte selectMaterialMenu() {
+        byte option;
+
+        do {
+            System.out.println("Selecciona el material de la decoración:");
+            System.out.println("1. Madera.");
+            System.out.println("2. Plástico.");
+
+            try {
+                option = sc.nextByte();
+                sc.nextLine();
+                if (option < 1 || option > 2) {
+                    System.out.println("Opción no válida");
+                }
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                throw e;
+            }
+        } while (option < 1 || option > 2);
+
+        return option;
     }
 
 }

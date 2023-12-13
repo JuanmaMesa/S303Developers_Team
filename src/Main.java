@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Main {
     
     public static void main(String[] args) {
-    	Data data = new Data();
+
+    	  Data data = new Data();
         
         data.loadStocks();
         data.loadTicket();
@@ -11,7 +12,14 @@ public class Main {
         data.loadShop();
         ArrayList<FloristShop> floristShops = data.getFloristerias();
 
+
+        floristShop.getStock().add(tree);
+        floristShop.getStock().add(flower);
+        floristShop.getStock().add(decoration);
+
+
         Menu.getMainMenu(floristShops);
+        System.out.println(floristShop.toString());
 
     }
 
