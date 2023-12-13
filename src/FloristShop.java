@@ -157,7 +157,6 @@ public class FloristShop {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error: Ingrese un valor válido (número entero).");
-                sc.nextLine();
             }
         } while (!exit);
 

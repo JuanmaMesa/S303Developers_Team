@@ -198,6 +198,7 @@ public class Menu {
                     System.out.println("Opción no válida");
                 }
             } catch (InputMismatchException e) {
+                sc.nextLine();
                 throw e;
             }
         } while (option < 1 || option > 2);
