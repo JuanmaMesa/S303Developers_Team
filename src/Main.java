@@ -8,24 +8,41 @@ public class Main {
 
 
         //Pruebas instancia objetos
-        FloristShop floristShop = new FloristShop("Floristeria");
-        System.out.println(floristShop);
-        floristShops.add(floristShop);
-        Ticket ticket = new Ticket(floristShop);
-        System.out.println(ticket);
-        Product product = new Product("Product", 50.0);
-        System.out.println(product);
+        FloristShop floristShop = new FloristShop("F");
+        //System.out.println(floristShop);
+        floristShops.add(floristShop);// agregado a la lista de floristerias
+
         Tree tree = new Tree("Tree", 10.0, 3.0);
         System.out.println(tree);
+        
+       System.out.println(floristShop.toString());
+        floristShop.addTree(tree);
+        System.out.println(floristShop.toString());        
+        
+        /*Ticket ticket = new Ticket(floristShop);
+        System.out.println(ticket);
+        
+        Product product = new Product("Product", 50.0);
+        System.out.println(product);
+        
+        
+        
+     
+       
+        
         Flower flower = new Flower("Flower", 10.5, "Red");
         System.out.println(flower);
+        
         Decoration decoration = new Decoration("Decoraion", 5.5, "Wood");
         System.out.println(decoration);
+
         floristShop.getStock().add(tree);
         floristShop.getStock().add(flower);
         floristShop.getStock().add(decoration);
 
+
         Menu.getMainMenu(floristShops);
+        System.out.println(floristShop.toString());
 
     }
 

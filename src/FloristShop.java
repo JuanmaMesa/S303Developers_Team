@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import javax.management.ObjectInstance;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -38,14 +40,18 @@ public class FloristShop {
         this.tickets = tickets;
     }
 
-    public static Product findProduct(ArrayList<Product> stock){
-        //TODO buscar producto en stock
-        return null;
+    public  Product findProduct(ArrayList<Product> stock, String name){
+        return stock.stream()
+        	.filter(n -> n.getName().equalsIgnoreCase(name))
+        	.findFirst()
+        	.orElse(null);
+      
     }
 
     public void addTicket(Ticket ticket){
         //TODO añadir ticket a array
     }
+
 
     public void addTree(ArrayList<Product> stock) {
         System.out.println("Introduce el nombre del árbol:");
@@ -171,24 +177,65 @@ public class FloristShop {
         }
     }
 
-    public void removeTree(ArrayList<Product> stock){
-        //TODO quitar arbol de array
-        System.out.println("removeTree()");
+    public void removeTree(Product producto){
+    	if(producto instanceof Tree) {
+    		stock.remove(producto);
+    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
+    	}else {
+    		System.out.println("El producto asignado no es un arbol");
+    	}
     }
 
-    public void removeFlower(ArrayList<Product> stock){
-        //TODO quitar flor de array
-        System.out.println("removeFlower()");
+    public void removeFlower(Product producto){
+        if(producto instanceof Flower) {
+        	stock.remove(producto);
+        	System.out.println(producto.getName()+" ha sido eliminado Correctamente");
+        }else {
+        	System.out.println("El producto asignado no es una flor");
+        	
+        }
+       
     }
 
-    public void removeDecoration(ArrayList<Product> stock) {
-        //TODO quitar decoración de array
-        System.out.println("removeDecoration()");
+    public void removeDecoration(Product producto) {
+    	if(producto instanceof Decoration) {
+    		stock.remove(producto);
+    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
+    	}else {
+    		System.out.println("El producto asignado no es una decoracion");
+    	}
     }
+    
 
-    public void getShopStockWithQuantity(ArrayList<Product> stock){
-        //TODO print stock con cantidad
-        System.out.println("getShopStockWithQuantity()");
+    public void getShopStockWithQuantity(){
+    	int indiceTree = 0;
+    	int indiceFlower = 0;
+    	int indiceDecoration = 0;
+    	
+    	for(Product p : stock) {
+    		if(p instanceof Tree) {
+    			indiceTree++;
+    			
+    		}if(p instanceof Flower) {
+        			
+        			indiceFlower++;
+    		
+    		}if(p instanceof Decoration) {
+        	
+        			indiceDecoration++;
+        			
+    		}
+    	}
+    	
+    	System.out.println("--- STOCK --- ");
+    	System.out.println("--- Total arboles --- \n "+ indiceTree);
+    	System.out.println("--- Total flores --- \n "+ indiceFlower);
+    	System.out.println("--- Total decorados --- \n "+ indiceDecoration);
+    	
+   
+    	
+    	
+		
     }
 
     public void getTotalValue(ArrayList<Product> stock){
