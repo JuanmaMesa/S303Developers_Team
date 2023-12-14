@@ -17,6 +17,7 @@ public class Data {
 		floristerias.add(fh1);
 		floristerias.add(fh2);
 
+
 		fh1.getStock().add(new Tree("pino", 5, 9));
 		fh1.getStock().add(new Flower("rosa", 8, "red"));
 		fh1.getStock().add(new Flower("periwinkle", 6, "violet"));
@@ -29,7 +30,7 @@ public class Data {
 		fh2.getStock().add(new Tree("almendro", 12, 23));
 		fh2.getStock().add(new Decoration("escritorio", 27, "madera"));
 	}
-	
+
 	public void loadProducts() {
 		
 		allProducts.add(new Tree("pino", 5, 9));
