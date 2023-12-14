@@ -2,11 +2,7 @@ import java.util.ArrayList;
 
 
 public class Data {
-	
-	private ArrayList<Product> stocks1 = new ArrayList<Product>();
-	private ArrayList<Ticket> tickets1 = new ArrayList<Ticket>();
-	private ArrayList<Product> stocks2 = new ArrayList<Product>();
-	private ArrayList<Ticket> tickets2 = new ArrayList<Ticket>();
+
 	private ArrayList<Product> allProducts = new ArrayList<Product>();
 	private ArrayList<FloristShop> floristerias = new ArrayList<FloristShop>();
 	
@@ -30,8 +26,16 @@ public class Data {
 		fh2.getStock().add(new Tree("almendro", 12, 23));
 		fh2.getStock().add(new Decoration("escritorio", 27, "madera"));
 
-		fh1.getTickets().add(new Ticket(1, allProducts, 50));
-		fh2.getTickets().add(new Ticket(2, allProducts, 100));
+		Ticket ticket1 = new Ticket();
+		Ticket ticket2 = new Ticket();
+
+		ticket1.setProducts(allProducts);
+		ticket2.setProducts(allProducts);
+		ticket1.calculateFinalPrice();
+		ticket2.calculateFinalPrice();
+
+		fh1.getTickets().add(ticket1);
+		fh2.getTickets().add(ticket2);
 	}
 
 	public void loadProducts() {
@@ -48,32 +52,6 @@ public class Data {
 		allProducts.add(new Tree("almendro", 12, 23));
 		allProducts.add(new Decoration("escritorio", 27, "madera"));
 	}
-
-
-	public ArrayList<Product> getStocks1() {
-		return stocks1;
-	}
-
-
-	public ArrayList<Ticket> getTickets1() {
-		return tickets1;
-	}
-
-
-	public ArrayList<Product> getStocks2() {
-		return stocks2;
-	}
-
-
-	public ArrayList<Ticket> getTickets2() {
-		return tickets2;
-	}
-
-
-	public ArrayList<Product> getAllProducts() {
-		return allProducts;
-	}
-
 
 	public ArrayList<FloristShop> getFloristerias() {
 		return floristerias;

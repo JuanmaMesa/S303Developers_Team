@@ -51,7 +51,6 @@ public class FloristShop {
     }
 
     public void addTicket(Ticket ticket) {
-        //TODO añadir ticket a array
         this.tickets.add(ticket);
 
     }
@@ -93,7 +92,7 @@ public class FloristShop {
         Tree tree = new Tree(nameTree, priceTree, heightTree);
         stock.add(tree);
 
-        System.out.println("Árbol añadido con éxito:\n" + tree);
+        System.out.println("Árbol "+tree.getName()+" añadido con éxito en "+name+".");
     }
 
     public void addFlower(ArrayList<Product> stock) {
@@ -118,7 +117,7 @@ public class FloristShop {
         Flower flower = new Flower(nameFlower, priceFlower, colorFlower);
         stock.add(flower);
 
-        System.out.println("Flor añadida con éxito:\n" + flower);
+        System.out.println("Flor "+flower.getName()+" añadido con éxito en "+name+".");
     }
 
     public void addDecoration(ArrayList<Product> stock) {
@@ -145,13 +144,13 @@ public class FloristShop {
                 switch (Menu.selectMaterialMenu()) {
                     case 1:
                         Decoration decoration = new Decoration(nameDecoration, priceDecoration, "Madera");
-                        System.out.println("Decoración añadida con éxito:\n" + decoration);
+                        System.out.println("Decoración "+decoration.getName()+" añadido con éxito en "+name+".");
                         stock.add(decoration);
                         exit = true;
                         break;
                     case 2:
                         decoration = new Decoration(nameDecoration, priceDecoration, "Plástico");
-                        System.out.println("Decoración añadida con éxito:\n" + decoration);
+                        System.out.println("Decoración "+decoration.getName()+" añadido con éxito en "+name+".");
                         stock.add(decoration);
                         exit = true;
                         break;
@@ -210,12 +209,9 @@ public class FloristShop {
         for (Product p : stock) {
             if (p instanceof Tree) {
                 indiceTree++;
-
             }
             if (p instanceof Flower) {
-
                 indiceFlower++;
-
             }
             if (p instanceof Decoration) {
 
@@ -223,12 +219,10 @@ public class FloristShop {
 
             }
         }
-
         System.out.println("--- STOCK --- ");
         System.out.println("--- Total arboles --- \n " + indiceTree);
         System.out.println("--- Total flores --- \n " + indiceFlower);
         System.out.println("--- Total decorados --- \n " + indiceDecoration);
-
     }
 
     public double getTotalValue(ArrayList<Product> stock) {
@@ -276,7 +270,6 @@ public class FloristShop {
         ticket.calculateFinalPrice();
         System.out.println("Precio total ticket: "+ ticket.getTotalPrice() + " €");
         addTicket(ticket);
-
 
     }
 

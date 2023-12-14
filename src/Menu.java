@@ -216,11 +216,11 @@ public class Menu {
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
+            System.out.println(floristShop.getName());
             floristShops.add(floristShop);
         } else{
-            System.out.println("Ya existe una floristería con ese nombre.");
+            System.out.println("Ya existe una floristería con el nombre "+floristShop.getName()+".");
         }
-        System.out.println(floristShop);
     }
 
     public static byte selectMaterialMenu() {
