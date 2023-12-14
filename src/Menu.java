@@ -84,7 +84,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.readString("Dime el nombre de la flor que quieres eliminiar:");
+                            String nameProduct = Input.readString("Dime el nombre de la flor que quieres eliminiar: ");
                             Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeFlower(producto);
@@ -102,7 +102,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar:");
+                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar: ");
                             Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeDecoration(producto);

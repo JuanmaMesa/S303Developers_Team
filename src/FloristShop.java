@@ -5,12 +5,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FloristShop {
-
+    private static int lastId = 0;
+    private int id;
     private String name;
     ArrayList<Product> stock;
     ArrayList<Ticket> tickets;
 
     public FloristShop(String name) {
+        this.id = ++lastId;
         this.name = name;
         this.stock = new ArrayList<Product>();
         this.tickets = new ArrayList<Ticket>();
