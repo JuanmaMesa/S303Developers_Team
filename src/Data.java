@@ -12,27 +12,22 @@ public class Data {
 	
 	
 	public void loadShop() {
-		FloristShop fh1 = new FloristShop("Rosas del valle", stocks1, tickets1);
-		FloristShop fh2 = new FloristShop("Rosas del bosque", stocks2, tickets2);
+		FloristShop fh1 = new FloristShop("Rosas del valle");
+		FloristShop fh2 = new FloristShop("Rosas del bosque");
 		floristerias.add(fh1);
 		floristerias.add(fh2);
-		
-	}
-	
 
-	public void loadStocks() {
-		stocks1.add(new Tree("pino", 5, 9));
-		stocks1.add(new Flower("rosa", 8, "red"));
-		stocks1.add(new Flower("periwinkle", 6, "violet"));
-		stocks1.add(new Tree("palmera", 12, 23));
-		stocks1.add(new Decoration("mueble", 40, "madera"));
-		
-		stocks2.add(new Tree("christmas tree", 78, 50));
-		stocks2.add(new Flower("tulipan", 8, "yellow"));
-		stocks2.add(new Flower("girasol", 6, "orange"));
-		stocks2.add(new Tree("almendro", 12, 23));
-		stocks2.add(new Decoration("escritorio", 27, "madera"));
-		
+		fh1.getStock().add(new Tree("pino", 5, 9));
+		fh1.getStock().add(new Flower("rosa", 8, "red"));
+		fh1.getStock().add(new Flower("periwinkle", 6, "violet"));
+		fh1.getStock().add(new Tree("palmera", 12, 23));
+		fh1.getStock().add(new Decoration("mueble", 40, "madera"));
+
+		fh2.getStock().add(new Tree("christmas tree", 78, 50));
+		fh2.getStock().add(new Flower("tulipan", 8, "yellow"));
+		fh2.getStock().add(new Flower("girasol", 6, "orange"));
+		fh2.getStock().add(new Tree("almendro", 12, 23));
+		fh2.getStock().add(new Decoration("escritorio", 27, "madera"));
 	}
 	
 	public void loadProducts() {
@@ -52,7 +47,7 @@ public class Data {
 	
 	public void loadTicket() {
 		tickets1.add(new Ticket(1, allProducts, 50));
-		tickets2. add(new Ticket(2, allProducts, 100));
+		tickets2.add(new Ticket(2, allProducts, 100));
 	}
 
 

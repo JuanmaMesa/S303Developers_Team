@@ -9,7 +9,7 @@ public class Input{
 		return new Scanner(System.in);
 	}
 	
-	public static byte llegirByte(String msj) throws InputMismatchException {
+	public static byte readByte(String msj) throws InputMismatchException {
 		Object num;
 		byte numCorrecto;
 		System.out.print(msj);
@@ -20,7 +20,7 @@ public class Input{
 		return numCorrecto;
 	}
 
-	public static int llegirInt(String msj) throws InputMismatchException{
+	public static int readInt(String msj) throws InputMismatchException{
 		Object obj;
 		int num;
 		
@@ -32,7 +32,7 @@ public class Input{
 	}
 	
 
-	public static double llegirDouble(String msj) throws InputMismatchException{
+	public static double readDouble(String msj) throws InputMismatchException{
 		Object obj;
 		double num;
 		
@@ -44,7 +44,7 @@ public class Input{
 	}
 	
 
-	public static String llegirString(String msj) {
+	public static String readString(String msj) {
 		System.out.print(msj);
 		String texto = input().nextLine();
 
