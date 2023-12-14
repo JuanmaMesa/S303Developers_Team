@@ -102,12 +102,12 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar: ");
+                            String nameProduct = Input.readString("Dime el nombre de la decoración que quieres eliminiar: ");
                             Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeDecoration(producto);
                         	}else {
-                        		System.out.println("Decoracion no encontrada en el Stock");
+                        		System.out.println("Decoración no encontrada en el Stock");
                         	}
                         } 
                         break;
@@ -129,7 +129,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                           System.out.println(floristShop.getTotalValue(floristShop.getStock()));
+                           System.out.println("Valor Total del stock: "+floristShop.getTotalValue(floristShop.getStock()) + " €");
                         }
                         break;
                     case 11:
@@ -159,7 +159,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                           System.out.println(floristShop.getSalesProfits(floristShop.getTickets()));
+                           System.out.println("Suma total de ventas: "+ floristShop.getSalesProfits(floristShop.getTickets()) + " €");
                         }
                         break;
                     case 0:
@@ -189,10 +189,10 @@ public class Menu {
             System.out.println("8.  Retirar decoración de floristería.");
             System.out.println("9.  Ver stock de floristería con cantidades.");
             System.out.println("10. Ver valor total de la floristería.");
-            System.out.println("11. Crear ticket de compra .");
+            System.out.println("11. Crear ticket de compra.");
             System.out.println("12. Mostrar compras antiguas.");
             System.out.println("13. Ver ganacias de floristería.");
-            System.out.println("0. Salir de la aplicación.\n");
+            System.out.println("0.  Salir de la aplicación.\n");
 
                 try {
                     option = Input.readByte("Introduce una opcion: ");
