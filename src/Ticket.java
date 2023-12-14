@@ -11,12 +11,6 @@ public class Ticket {
         this.products = new ArrayList<Product>();
     }
 
-    public Ticket(int id, ArrayList<Product> products, double totalPrice) {
-        this.id = id;
-        this.products = products;
-        this.totalPrice = totalPrice;
-    }
-
     public int getId() {
         return id;
     }
