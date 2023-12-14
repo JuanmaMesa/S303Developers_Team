@@ -29,6 +29,9 @@ public class Data {
 		fh2.getStock().add(new Flower("girasol", 6, "orange"));
 		fh2.getStock().add(new Tree("almendro", 12, 23));
 		fh2.getStock().add(new Decoration("escritorio", 27, "madera"));
+
+		fh1.getTickets().add(new Ticket(1, allProducts, 50));
+		fh2.getTickets().add(new Ticket(2, allProducts, 100));
 	}
 
 	public void loadProducts() {
@@ -44,11 +47,6 @@ public class Data {
 		allProducts.add(new Flower("girasol", 6, "orange"));
 		allProducts.add(new Tree("almendro", 12, 23));
 		allProducts.add(new Decoration("escritorio", 27, "madera"));
-	}
-	
-	public void loadTicket() {
-		tickets1.add(new Ticket(1, allProducts, 50));
-		tickets2.add(new Ticket(2, allProducts, 100));
 	}
 
 

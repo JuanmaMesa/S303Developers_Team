@@ -6,7 +6,7 @@ public class Main {
 
         Data data = new Data();
 
-        data.loadTicket();
+
         data.loadProducts();
         data.loadShop();
         ArrayList<FloristShop> floristShops = data.getFloristerias();

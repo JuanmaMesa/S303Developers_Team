@@ -19,9 +19,9 @@ public class FloristShop {
     }
 
     public FloristShop(String name, ArrayList<Product> stock, ArrayList<Ticket> tickets) {
-    	this.name = name;
-    	this.stock = stock;
-    	this.tickets = tickets;
+        this.name = name;
+        this.stock = stock;
+        this.tickets = tickets;
     }
 
     public String getName() {
@@ -42,15 +42,15 @@ public class FloristShop {
     }
 
 
-    public  Product findProduct(ArrayList<Product> stock, String name){
+    public Product findProduct(ArrayList<Product> stock, String name) {
         return stock.stream()
-        	.filter(n -> n.getName().equalsIgnoreCase(name))
-        	.findFirst()
-        	.orElse(null);
-      
+                .filter(n -> n.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+
     }
 
-    public void addTicket(Ticket ticket){
+    public void addTicket(Ticket ticket) {
         //TODO añadir ticket a array
         this.tickets.add(ticket);
 
@@ -96,7 +96,7 @@ public class FloristShop {
         System.out.println("Árbol añadido con éxito:\n" + tree);
     }
 
-    public void addFlower(ArrayList<Product> stock){
+    public void addFlower(ArrayList<Product> stock) {
         String nameFlower = Input.readString("Introduce el nombre de la flor: ");
 
         double priceFlower = 0.0;
@@ -121,7 +121,7 @@ public class FloristShop {
         System.out.println("Flor añadida con éxito:\n" + flower);
     }
 
-    public void addDecoration(ArrayList<Product> stock){
+    public void addDecoration(ArrayList<Product> stock) {
         String nameDecoration = Input.readString("Introduce el nombre de la decoración: ");
 
         double priceDecoration = 0.0;
@@ -163,132 +163,131 @@ public class FloristShop {
 
     }
 
-    public void getShopStock(ArrayList<Product> stock){
-        if (stock.isEmpty()){
-            System.out.println("No hay stock en la floristería "+name+".");
+    public void getShopStock(ArrayList<Product> stock) {
+        if (stock.isEmpty()) {
+            System.out.println("No hay stock en la floristería " + name + ".");
         } else {
-            System.out.println("El stock disponible en la floristería "+name+" es:");
+            System.out.println("El stock disponible en la floristería " + name + " es:");
             stock.forEach(product -> System.out.println(product));
         }
     }
 
-    public void removeTree(Product producto){
-    	if(producto instanceof Tree) {
-    		stock.remove(producto);
-    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
-    	}else {
-    		System.out.println("El producto asignado no es un arbol");
-    	}
+    public void removeTree(Product producto) {
+        if (producto instanceof Tree) {
+            stock.remove(producto);
+            System.out.println(producto.getName() + " ha sido eliminado Correctamente.");
+        } else {
+            System.out.println("El producto asignado no es un arbol.");
+        }
     }
 
-    public void removeFlower(Product producto){
-        if(producto instanceof Flower) {
-        	stock.remove(producto);
-        	System.out.println(producto.getName()+" ha sido eliminado Correctamente");
-        }else {
-        	System.out.println("El producto asignado no es una flor");
-        	
+    public void removeFlower(Product producto) {
+        if (producto instanceof Flower) {
+            stock.remove(producto);
+            System.out.println(producto.getName() + " ha sido eliminado Correctamente.");
+        } else {
+            System.out.println("El producto asignado no es una flor.");
+
         }
-       
+
     }
 
     public void removeDecoration(Product producto) {
-    	if(producto instanceof Decoration) {
-    		stock.remove(producto);
-    		System.out.println(producto.getName()+" ha sido eliminado Correctamente");
-    	}else {
-    		System.out.println("El producto asignado no es una decoracion");
-    	}
-    }
-    
-
-    public void getShopStockWithQuantity(){
-    	int indiceTree = 0;
-    	int indiceFlower = 0;
-    	int indiceDecoration = 0;
-    	
-    	for(Product p : stock) {
-    		if(p instanceof Tree) {
-    			indiceTree++;
-    			
-    		}if(p instanceof Flower) {
-        			
-        			indiceFlower++;
-    		
-    		}if(p instanceof Decoration) {
-        	
-        			indiceDecoration++;
-        			
-    		}
-    	}
-    	
-    	System.out.println("--- STOCK --- ");
-    	System.out.println("--- Total arboles --- \n "+ indiceTree);
-    	System.out.println("--- Total flores --- \n "+ indiceFlower);
-    	System.out.println("--- Total decorados --- \n "+ indiceDecoration);
-    	
-   
-    	
-    	
-		
+        if (producto instanceof Decoration) {
+            stock.remove(producto);
+            System.out.println(producto.getName() + " ha sido eliminado Correctamente.");
+        } else {
+            System.out.println("El producto asignado no es una decoracion.");
+        }
     }
 
-    public double getTotalValue(ArrayList<Product> stock){
+
+    public void getShopStockWithQuantity() {
+        int indiceTree = 0;
+        int indiceFlower = 0;
+        int indiceDecoration = 0;
+
+        for (Product p : stock) {
+            if (p instanceof Tree) {
+                indiceTree++;
+
+            }
+            if (p instanceof Flower) {
+
+                indiceFlower++;
+
+            }
+            if (p instanceof Decoration) {
+
+                indiceDecoration++;
+
+            }
+        }
+
+        System.out.println("--- STOCK --- ");
+        System.out.println("--- Total arboles --- \n " + indiceTree);
+        System.out.println("--- Total flores --- \n " + indiceFlower);
+        System.out.println("--- Total decorados --- \n " + indiceDecoration);
+
+    }
+
+    public double getTotalValue(ArrayList<Product> stock) {
         //TODO valor total stock
-    	double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
+        double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
         // TODO sysout con totalValue
         return totalValue;
     }
 
-    public void createPurchaseTicket(ArrayList<Product> stock){
+    public void createPurchaseTicket(ArrayList<Product> stock) {
         //TODO crear nuevo ticket
-    	byte option= -1;
-    	String yesNo = "";
-    	boolean endPurchase = false;
-    	Ticket ticket = new Ticket();
-    	do {
-    		System.out.println("Productos en stock: ");
+        byte option = -1;
+        String yesNo = "";
+        boolean endPurchase = false;
+        Ticket ticket = new Ticket();
+        do {
+            System.out.println("Productos en stock: ");
             //TODO Linkar con stock de floristShop
-        	for (int i=1; i<=stock.size(); i++) {
-        		System.out.println(i+". "+stock.get(i-1).getName());
-        	}
-        	do {	
-        		option = Input.readByte("Qué objeto quieres comprar?: ");
-        		if (option < 1 || option>stock.size()) {
-        			System.out.println("Opcion no valida\n");
-        		}
-        	}while (option < 1 || option>stock.size());
-        	
-        	ticket.addProduct(stock.get(option-1));
-        	System.out.println("Producto anyadido\n");
-    		do {
-    			yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
-        	}while(!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+            for (int i = 1; i <= stock.size(); i++) {
+                System.out.println(i + ". " + stock.get(i - 1).getName());
+            }
+            do {
+                option = Input.readByte("Qué objeto quieres comprar?: ");
+                if (option < 1 || option > stock.size()) {
+                    System.out.println("Opcion no valida.\n");
+                }
+            } while (option < 1 || option > stock.size());
 
-        	if (yesNo.equalsIgnoreCase("n")) {
-        		endPurchase = true;
-        	}
-	
-    	}while (endPurchase == false);
-    	ticket.calculateFinalPrice();
+            ticket.addProduct(stock.get(option - 1));
+            stock.remove(stock.get(option - 1));
+            System.out.println("Producto añadido.\n");
+            do {
+                yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
+            } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+
+            if (yesNo.equalsIgnoreCase("n")) {
+                endPurchase = true;
+            }
+
+        } while (endPurchase == false);
+        ticket.calculateFinalPrice();
         addTicket(ticket);
 
 
     }
 
-    public void getPurchaseTickets(ArrayList<Ticket> tickets){
+    public void getPurchaseTickets(ArrayList<Ticket> tickets) {
         //TODO Linkar con stock de floristShop
-    	
-    	for (Ticket t: tickets) {
-    		System.out.println("Ticket ID: "+t.getId()+" tiene los siguientes productos: ");
-    		t.getProducts().forEach((p) -> System.out.println("- "+p.getName()));
-    		System.out.println("Precio Total de la compra: " + t.getTotalPrice()+ " €\n");
-    	}
-       
+
+        for (Ticket t : tickets) {
+            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: ");
+            t.getProducts().forEach((p) -> System.out.println("- " + p.getName()));
+            System.out.println("Precio Total de la compra: " + t.getTotalPrice() + " €\n");
+        }
+
     }
 
-    public double getSalesProfits(ArrayList<Ticket> tickets){
-    	double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
+    public double getSalesProfits(ArrayList<Ticket> tickets) {
+        double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
         //TODO sysout totalEarns
         return totalEarns;
     }
