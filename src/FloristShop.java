@@ -15,7 +15,7 @@ public class FloristShop {
         this.stock = new ArrayList<Product>();
         this.tickets = new ArrayList<Ticket>();
     }
-    
+
     public FloristShop(String name, ArrayList<Product> stock, ArrayList<Ticket> tickets) {
     	this.name = name;
     	this.stock = stock;
@@ -56,13 +56,13 @@ public class FloristShop {
 
 
     public void addTree(ArrayList<Product> stock) {
-        String nameTree = Input.llegirString("Introduce el nombre del árbol:");
+        String nameTree = Input.readString("Introduce el nombre del árbol: ");
 
         double priceTree = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                priceTree = Input.llegirDouble("Introduce el precio del árbol:");
+                priceTree = Input.readDouble("Introduce el precio del árbol: ");
                 if (priceTree >= 0) {
                     validPrice = true;
                 } else {
@@ -77,7 +77,7 @@ public class FloristShop {
         boolean validHeight = false;
         while (!validHeight) {
             try {
-                heightTree = Input.llegirDouble("Introduce la altura del árbol:");
+                heightTree = Input.readDouble("Introduce la altura del árbol: ");
                 if (heightTree >= 0) {
                     validHeight = true;
                 } else {
@@ -95,13 +95,13 @@ public class FloristShop {
     }
 
     public void addFlower(ArrayList<Product> stock){
-        String nameFlower = Input.llegirString("Introduce el nombre de la flor:");
+        String nameFlower = Input.readString("Introduce el nombre de la flor: ");
 
         double priceFlower = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                priceFlower = Input.llegirDouble(("Introduce el precio de la flor:"));
+                priceFlower = Input.readDouble(("Introduce el precio de la flor: "));
                 if (priceFlower >= 0) {
                     validPrice = true;
                 } else {
@@ -112,7 +112,7 @@ public class FloristShop {
             }
         }
 
-        String colorFlower = Input.llegirString("Introduce el color de la flor:");
+        String colorFlower = Input.readString("Introduce el color de la flor: ");
         Flower flower = new Flower(nameFlower, priceFlower, colorFlower);
         stock.add(flower);
 
@@ -120,13 +120,13 @@ public class FloristShop {
     }
 
     public void addDecoration(ArrayList<Product> stock){
-        String nameDecoration = Input.llegirString("Introduce el nombre de la decoración:");
+        String nameDecoration = Input.readString("Introduce el nombre de la decoración: ");
 
         double priceDecoration = 0.0;
         boolean validPrice = false;
         while (!validPrice) {
             try {
-                priceDecoration = Input.llegirDouble(("Introduce el precio de la decoración:"));
+                priceDecoration = Input.readDouble(("Introduce el precio de la decoración: "));
                 if (priceDecoration >= 0) {
                     validPrice = true;
                 } else {
@@ -138,7 +138,6 @@ public class FloristShop {
         }
 
         boolean exit = false;
-        //TODO Revisar entrada menu
         do {
             try {
                 switch (Menu.selectMaterialMenu()) {
@@ -252,7 +251,7 @@ public class FloristShop {
         		System.out.println(i+". "+stock.get(i-1).getName());
         	}
         	do {	
-        		option = Input.llegirByte("Qué objeto quieres comprar?: ");
+        		option = Input.readByte("Qué objeto quieres comprar?: ");
         		if (option < 1 || option>stock.size()) {
         			System.out.println("Opcion no valida\n");
         		}
@@ -261,7 +260,7 @@ public class FloristShop {
         	ticket.addProduct(stock.get(option-1));
         	System.out.println("Producto anyadido\n");
     		do {
-    			yesNo = Input.llegirString("Quieres seguir comprando? (S/N): ");
+    			yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
         	}while(!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
 
         	if (yesNo.equalsIgnoreCase("n")) {

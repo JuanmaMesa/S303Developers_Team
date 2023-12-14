@@ -5,8 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         Data data = new Data();
-        
-        data.loadStocks();
+
         data.loadTicket();
         data.loadProducts();
         data.loadShop();
@@ -29,7 +28,7 @@ public class Main {
     }
 
     public static String nameFloristShop (){
-        String shopName = Input.llegirString("Introduce el nombre de la floristeria: ");
+        String shopName = Input.readString("Introduce el nombre de la floristeria: ");
 
         return shopName;
     }

@@ -16,7 +16,7 @@ public class Menu {
                         createFloristShop(floristShops);
                         break;
 
-                    case 2: // TODO Ernesto1
+                    case 2:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
@@ -27,7 +27,7 @@ public class Menu {
                         }
                         break;
 
-                    case 3: // TODO Ernesto1
+                    case 3:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
@@ -38,7 +38,7 @@ public class Menu {
                         }
                         break;
 
-                    case 4: // TODO Ernesto1
+                    case 4:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
@@ -49,7 +49,7 @@ public class Menu {
                         }
                         break;
 
-                    case 5: // TODO Ernesto1
+                    case 5:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
@@ -67,7 +67,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.llegirString("Dime el nombre del arbol que quieres eliminiar: ");
+                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar: ");
                         	Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeTree(producto);
@@ -84,7 +84,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.llegirString("Dime el nombre de la flor que quieres eliminiar:");
+                            String nameProduct = Input.readString("Dime el nombre de la flor que quieres eliminiar:");
                             Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeFlower(producto);
@@ -102,7 +102,7 @@ public class Menu {
                         if(floristShop == null){
                             System.out.println("Floristería no encontrada.");
                         } else{
-                            String nameProduct = Input.llegirString("Dime el nombre del arbol que quieres eliminiar:");
+                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar:");
                             Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
                         	if(producto != null) {
                         		floristShop.removeDecoration(producto);
@@ -168,7 +168,7 @@ public class Menu {
                         break;
                 }
             } catch (InputMismatchException e) {
-                Input.llegirString("Error: Ingrese un valor válido (número entero): ");
+                Input.readString("Error: Ingrese un valor válido: ");
             }
         } while (!exit);
     }
@@ -193,9 +193,9 @@ public class Menu {
             System.out.println("12. Mostrar compras antiguas.");
             System.out.println("13. Ver ganacias de floristería.");
             System.out.println("0. Salir de la aplicación.\n");
-            do{
+
                 try {
-                    option = Input.llegirByte("Introduce una opcion (1-13): ");
+                    option = Input.readByte("Introduce una opcion: ");
                     Input.input();
                     if (option < 0 || option > 13) {
                         System.out.println("Opción no válida");
@@ -204,8 +204,6 @@ public class Menu {
                 } catch (InputMismatchException e) {
                     System.out.println("Opcion no valida");
                 }
-            }while (numCorrect == false);
-
 
         } while (option < 0 || option > 13);
 
@@ -213,7 +211,7 @@ public class Menu {
     }
 
     public static void createFloristShop(ArrayList<FloristShop> floristShops) {
-        String inputName = Input.llegirString("Introduce el nombre de la florister�a: ");
+        String inputName = Input.readString("Introduce el nombre de la floristería: ");
         FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
         if(floristShop == null){
             floristShop = new FloristShop(inputName);
@@ -226,7 +224,7 @@ public class Menu {
     }
 
     public static byte selectMaterialMenu() {
-        byte option;
+        byte option = -1;
 
         do {
             System.out.println("Selecciona el material de la decoración:");
@@ -234,14 +232,12 @@ public class Menu {
             System.out.println("2. Plástico.");
 
             try {
-                option = Input.llegirByte("Escoge una opción: ");
-                Input.cleanBuffer();
+                option = Input.readByte("Escoge una opción: ");
                 if (option < 1 || option > 2) {
                     System.out.println("Opción no válida");
                 }
             } catch (InputMismatchException e) {
-                Input.cleanBuffer();
-                throw e;
+                System.out.println("Opcion no valida");
             }
         } while (option < 1 || option > 2);
 
