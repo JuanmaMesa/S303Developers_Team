@@ -1,11 +1,12 @@
 public class Product {
-    
-    private static int id=0;
+
+    private static int lastId = 0;
+    private int id;
     private String name;
     private Double price;
 
     public Product(String name, double price) {
-        this.id = id++;
+        this.id = lastId++;
         this.name = name;
         this.price = price;
     }

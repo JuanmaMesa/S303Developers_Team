@@ -10,11 +10,11 @@ public class Ticket {
         this.id = ++lastId;
         this.products = new ArrayList<Product>();
     }
-    
+
     public Ticket(int id, ArrayList<Product> products, double totalPrice) {
-    	this.id = id;
-    	this.products = products;
-    	this.totalPrice = totalPrice;
+        this.id = id;
+        this.products = products;
+        this.totalPrice = totalPrice;
     }
 
     public int getId() {
@@ -34,16 +34,17 @@ public class Ticket {
     }
 
 
-    public void addProduct(Product p){
+    public void addProduct(Product p) {
         // TODO añadir productos a ticket
-    	this.products.add(p);
+        this.products.add(p);
     }
 
-    public void calculateFinalPrice(){
+    public void calculateFinalPrice() {
         // TODO calcula precio ticket
-    	this.totalPrice = this.products.stream().mapToDouble(Product::getPrice).sum();
+        this.totalPrice = this.products.stream().mapToDouble(Product::getPrice).sum();
 
     }
+
 
     @Override
     public String toString() {
