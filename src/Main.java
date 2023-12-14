@@ -11,7 +11,7 @@ public class Main {
         data.loadProducts();
         data.loadShop();
         ArrayList<FloristShop> floristShops = data.getFloristerias();
-
+    
         Menu.getMainMenu(floristShops);
 
     }
