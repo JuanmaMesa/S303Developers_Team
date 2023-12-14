@@ -243,33 +243,38 @@ public class FloristShop {
         byte option = -1;
         String yesNo = "";
         boolean endPurchase = false;
+        double precioTicket = 0;
         Ticket ticket = new Ticket();
-        do {
-            System.out.println("Productos en stock: ");
-            //TODO Linkar con stock de floristShop
-            for (int i = 1; i <= stock.size(); i++) {
-                System.out.println(i + ". " + stock.get(i - 1).getName());
-            }
+
+        if (!stock.isEmpty()){
             do {
-                option = Input.readByte("Qué objeto quieres comprar?: ");
-                if (option < 1 || option > stock.size()) {
-                    System.out.println("Opcion no valida.\n");
+                System.out.println("Productos en stock: ");
+                //TODO Linkar con stock de floristShop
+                for (int i = 1; i <= stock.size(); i++) {
+                    System.out.println(i + ". " + stock.get(i - 1).getName()+" "+stock.get(i - 1).getPrice()+" €");
                 }
-            } while (option < 1 || option > stock.size());
+                do {
+                    option = Input.readByte("Qué objeto quieres comprar?: ");
+                    if (option < 1 || option > stock.size()) {
+                        System.out.println("Opcion no valida.\n");
+                    }
+                } while (option < 1 || option > stock.size());
 
-            ticket.addProduct(stock.get(option - 1));
-            stock.remove(stock.get(option - 1));
-            System.out.println("Producto añadido.\n");
-            do {
-                yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
-            } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+                ticket.addProduct(stock.get(option - 1));
+                stock.remove(stock.get(option - 1));
+                System.out.println("Producto añadido.\n");
+                do {
+                    yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
+                } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
 
-            if (yesNo.equalsIgnoreCase("n")) {
-                endPurchase = true;
-            }
+                if (yesNo.equalsIgnoreCase("n")) {
+                    endPurchase = true;
+                }
+            }while (endPurchase == false);
+        }else System.out.println("La floristería no tiene stock en estos momentos.\n");
 
-        } while (endPurchase == false);
         ticket.calculateFinalPrice();
+        System.out.println("Precio total ticket: "+ ticket.getTotalPrice() + " €");
         addTicket(ticket);
 
 
@@ -295,7 +300,8 @@ public class FloristShop {
     @Override
     public String toString() {
         return "FloristShop{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", stock=" + stock +
                 ", tickets=" + tickets +
                 '}';
