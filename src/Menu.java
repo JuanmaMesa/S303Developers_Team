@@ -201,7 +201,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             FileManager fileManager = new FileManager();
-                            String name = "Data/dataFlorishop.txt";
+                            String name = "Data/"+ shopName +".txt";
                             try {
                                 fileManager.saveData(floristShop, name);
                                 System.out.println("Stock guardado correctamente");
