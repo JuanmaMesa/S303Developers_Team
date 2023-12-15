@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import javax.management.ObjectInstance;
@@ -42,9 +44,9 @@ public class FloristShop {
     }
 
 
-    public Product findProduct(ArrayList<Product> stock, String name) {
+    public Product findProduct(ArrayList<Product> stock, int id_product) {
         return stock.stream()
-                .filter(n -> n.getName().equalsIgnoreCase(name))
+                .filter(n -> n.getId() == (id_product))
                 .findFirst()
                 .orElse(null);
 
@@ -219,7 +221,7 @@ public class FloristShop {
 
             }
         }
-        System.out.println("--- STOCK --- ");
+        System.out.println("      --- STOCK --- ");
         System.out.println("--- Total arboles --- \n " + indiceTree);
         System.out.println("--- Total flores --- \n " + indiceFlower);
         System.out.println("--- Total decorados --- \n " + indiceDecoration);
@@ -290,13 +292,25 @@ public class FloristShop {
         return totalEarns;
     }
 
+    public void printInfoStock(Class<? extends Product> product){
+        stock.stream()
+                .filter(p -> product.isInstance(p))
+                .forEach(System.out::println);
+
+
+        }
+
+
+
+
+
     @Override
     public String toString() {
         return "FloristShop{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", stock=" + stock +
-                ", tickets=" + tickets +
+                "id: " + id +
+                ", name: " + name + '\'' +
+                ", stock: " + stock +
+                ", tickets: " + tickets +
                 '}';
     }
 }

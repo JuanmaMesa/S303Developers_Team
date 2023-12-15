@@ -16,6 +16,6 @@ public class Tree extends Product{
 
     @Override
     public String toString() {
-        return "Tree{" + "id=" + super.getId() + ", name='" + super.getName() + ", price=" + super.getPrice() +", height=" + height + '}';
+        return "Tree{" + "id: " + super.getId() + ", name: " + super.getName() + ", price: " + super.getPrice() +", height: " + height + '}';
     }
-}// Todo juanma hacer txt
+}
