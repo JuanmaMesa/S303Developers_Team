@@ -5,11 +5,9 @@ import java.io.PrintWriter;
 public class FileManager {
 
     public void saveData(FloristShop floristShop, String nameFile) throws IOException {
-        PrintWriter printWriter = null;
-        try {
-            printWriter = new PrintWriter(new FileWriter(nameFile));
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(nameFile))){
 
-            // guardar info
+            // guardar informacion en el archivo
             for (Product product : floristShop.getStock()) {
                 if (product instanceof Tree) {
                     printWriter.println(("TREE," + product.toString()));
@@ -22,10 +20,6 @@ public class FileManager {
             }
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
-        } finally {
-            if (printWriter != null) {
-                printWriter.close();
-            }
         }
 
     }

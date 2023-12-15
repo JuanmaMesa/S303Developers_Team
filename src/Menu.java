@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -192,6 +193,24 @@ public class Menu {
                             System.out.println("Suma total de ventas: " + floristShop.getSalesProfits(floristShop.getTickets()) + " €");
                         }
                         break;
+                    case 14:
+                        shopName = Main.nameFloristShop();
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                        if (floristShop == null) {
+                            System.out.println("Floristería no encontrada.");
+                        } else {
+                            FileManager fileManager = new FileManager();
+                            String name = "Data/dataFlorishop.txt";
+                            try {
+                                fileManager.saveData(floristShop, name);
+                                System.out.println("Stock guardado correctamente");
+                            } catch (IOException e) {
+                                System.out.println("Error al guardar el stock: " + e.getMessage());
+                            }
+                        }
+                        break;
+
                     case 0:
                         System.out.println("Saliendo de la aplicación.");
                         exit = true;
@@ -222,12 +241,13 @@ public class Menu {
             System.out.println("11. Crear ticket de compra.");
             System.out.println("12. Mostrar compras antiguas.");
             System.out.println("13. Ver ganacias de floristería.");
+            System.out.println("14. Actualizar Stock de la floristería.");
             System.out.println("0.  Salir de la aplicación.\n");
 
             try {
                 option = Input.readByte("Introduce una opcion: ");
                 Input.input();
-                if (option < 0 || option > 13) {
+                if (option < 0 || option > 14) {
                     System.out.println("Opción no válida");
                 }
                 numCorrect = true;
@@ -235,7 +255,7 @@ public class Menu {
                 System.out.println("Opcion no valida");
             }
 
-        } while (option < 0 || option > 13);
+        } while (option < 0 || option > 14);
 
         return option;
     }
