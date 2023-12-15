@@ -74,20 +74,37 @@ public class Menu {
                                 System.out.println("En estos momentos no hay arboles en el Stock");
 
                                 }else {
-                                    System.out.println("  --- Strock --- ");
-                                    floristShop.printInfoStock(Tree.class);
-                                    System.out.println();//
-                                    int idProduct = Input.readInt("Dime el Id del arbol que quieres eliminiar: ");
-                                    Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
+                                System.out.println("  --- Strock --- ");
+                                floristShop.printInfoStock(Tree.class);
+                                System.out.println();//
+                                int idProduct = Input.readInt("Dime el Id del arbol que quieres eliminiar: ");
+                                Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
 
 
-                                    if (producto != null) {
-                                        floristShop.removeTree(producto);
-                                    } else {
-                                        System.out.println("Arbol no encontrado en el Stock");
-                                    }
+                                if (producto != null) {
+                                  boolean continueLoop = false;
+
+                                    do {
+                                        System.out.println("Estas a punto de eliminar el arbol: " + producto.getName());
+                                        String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
+                                        if(confirm.equalsIgnoreCase("si")){
+                                            floristShop.removeTree(producto);
+                                            continueLoop = true;
+                                        }
+                                        else if (confirm.equalsIgnoreCase("no")) {
+                                            System.out.println("Operacion cancelada");
+                                            continueLoop = true;
+                                        } else {
+                                            System.out.println("Opcion no valida");
+
+                                        }
+
+
+                                    } while (continueLoop == false);
+
+
                                 }
-
+                            }
                         }
                         break;
 
