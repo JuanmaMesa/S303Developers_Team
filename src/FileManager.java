@@ -25,8 +25,10 @@ public class FileManager {
     }
 
     public FloristShop loadData(String nameFile) throws IOException{
+        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        FloristShop floristShop = new FloristShop(nameFile,products,tickets);
 
-        List<Product> products = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
             String line;
             while((line = br.readLine()) !=null){
@@ -43,6 +45,8 @@ public class FileManager {
                 }
             }
         }
+        return floristShop;
+
 
 
 

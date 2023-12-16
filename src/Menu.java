@@ -25,6 +25,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop.addTree(floristShop.getStock());
+                            WriterToTxt(floristShop,shopName);
                         }
                         break;
 
@@ -36,6 +37,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop.addFlower(floristShop.getStock());
+                            WriterToTxt(floristShop,shopName);
                         }
                         break;
 
@@ -47,6 +49,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop.addDecoration(floristShop.getStock());
+                            WriterToTxt(floristShop,shopName);
                         }
                         break;
 
@@ -93,6 +96,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeTree(producto);
+                                            WriterToTxt(floristShop,shopName);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -137,6 +141,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeFlower(producto);
+                                            WriterToTxt(floristShop,shopName);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -182,6 +187,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeDecoration(producto);
+                                            WriterToTxt(floristShop,shopName);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -253,16 +259,29 @@ public class Menu {
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            WriterToTxt(floristShop,shopName);
+
+                        }
+                        break;
+                    case 15:
+                        shopName = Main.nameFloristShop();
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                        if (floristShop == null) {
+                            System.out.println("Floristería no encontrada.");
+                        }else{
                             FileManager fileManager = new FileManager();
                             String name = "Data/" + shopName + ".txt";
-                            try {
-                                fileManager.saveData(floristShop, name);
-                                System.out.println("Stock guardado correctamente");
-                            } catch (IOException e) {
-                                System.out.println("Error al guardar el stock: " + e.getMessage());
+                            try{
+                                fileManager.loadData(name);
+                                System.out.println("cargado corectamente");
+
+                            }catch (IOException e){
+                                System.out.println("Error de lectura ");
                             }
                         }
                         break;
+
 
                     case 0:
                         System.out.println("Saliendo de la aplicación.");
@@ -295,12 +314,13 @@ public class Menu {
             System.out.println("12. Mostrar compras antiguas.");
             System.out.println("13. Ver ganacias de floristería.");
             System.out.println("14. Actualizar Stock de la floristería.");
+            System.out.println("15. cargar Stock de la floristería.");
             System.out.println("0.  Salir de la aplicación.\n");
 
             try {
                 option = Input.readByte("Introduce una opcion: ");
                 Input.input();
-                if (option < 0 || option > 14) {
+                if (option < 0 || option > 15) {
                     System.out.println("Opción no válida");
                 }
                 numCorrect = true;
@@ -308,7 +328,7 @@ public class Menu {
                 System.out.println("Opcion no valida");
             }
 
-        } while (option < 0 || option > 14);
+        } while (option < 0 || option > 15);
 
         return option;
     }
@@ -345,6 +365,18 @@ public class Menu {
         } while (option < 1 || option > 2);
 
         return option;
+    }
+
+    public static void WriterToTxt(FloristShop floristShop , String shopName){
+        FileManager fileManager = new FileManager();
+        String name = "Data/" + shopName + ".txt";
+        try {
+            fileManager.saveData(floristShop, name);
+            System.out.println("Stock guardado correctamente");
+        } catch (IOException e) {
+            System.out.println("Error al guardar el stock: " + e.getMessage());
+        }
+
     }
 
 }
