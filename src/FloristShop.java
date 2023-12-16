@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import javax.management.ObjectInstance;
@@ -42,9 +44,9 @@ public class FloristShop {
     }
 
 
-    public Product findProduct(ArrayList<Product> stock, String name) {
+    public Product findProduct(ArrayList<Product> stock, int id_product) {
         return stock.stream()
-                .filter(n -> n.getName().equalsIgnoreCase(name))
+                .filter(n -> n.getId() == (id_product))
                 .findFirst()
                 .orElse(null);
 
@@ -92,7 +94,7 @@ public class FloristShop {
         Tree tree = new Tree(nameTree, priceTree, heightTree);
         stock.add(tree);
 
-        System.out.println("Árbol "+tree.getName()+" añadido con éxito en "+name+".");
+        System.out.println("Árbol " + tree.getName() + " añadido con éxito en " + name + ".");
     }
 
     public void addFlower(ArrayList<Product> stock) {
@@ -117,7 +119,7 @@ public class FloristShop {
         Flower flower = new Flower(nameFlower, priceFlower, colorFlower);
         stock.add(flower);
 
-        System.out.println("Flor "+flower.getName()+" añadido con éxito en "+name+".");
+        System.out.println("Flor " + flower.getName() + " añadido con éxito en " + name + ".");
     }
 
     public void addDecoration(ArrayList<Product> stock) {
@@ -144,13 +146,13 @@ public class FloristShop {
                 switch (Menu.selectMaterialMenu()) {
                     case 1:
                         Decoration decoration = new Decoration(nameDecoration, priceDecoration, "Madera");
-                        System.out.println("Decoración "+decoration.getName()+" añadido con éxito en "+name+".");
+                        System.out.println("Decoración " + decoration.getName() + " añadido con éxito en " + name + ".");
                         stock.add(decoration);
                         exit = true;
                         break;
                     case 2:
                         decoration = new Decoration(nameDecoration, priceDecoration, "Plástico");
-                        System.out.println("Decoración "+decoration.getName()+" añadido con éxito en "+name+".");
+                        System.out.println("Decoración " + decoration.getName() + " añadido con éxito en " + name + ".");
                         stock.add(decoration);
                         exit = true;
                         break;
@@ -219,7 +221,7 @@ public class FloristShop {
 
             }
         }
-        System.out.println("--- STOCK --- ");
+        System.out.println("      --- STOCK --- ");
         System.out.println("--- Total arboles --- \n " + indiceTree);
         System.out.println("--- Total flores --- \n " + indiceFlower);
         System.out.println("--- Total decorados --- \n " + indiceDecoration);
@@ -240,12 +242,12 @@ public class FloristShop {
         double precioTicket = 0;
         Ticket ticket = new Ticket();
 
-        if (!stock.isEmpty()){
+        if (!stock.isEmpty()) {
             do {
                 System.out.println("Productos en stock: ");
                 //TODO Linkar con stock de floristShop
                 for (int i = 1; i <= stock.size(); i++) {
-                    System.out.println(i + ". " + stock.get(i - 1).getName()+" "+stock.get(i - 1).getPrice()+" €");
+                    System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
                 }
                 do {
                     option = Input.readByte("Qué objeto quieres comprar?: ");
@@ -264,11 +266,11 @@ public class FloristShop {
                 if (yesNo.equalsIgnoreCase("n")) {
                     endPurchase = true;
                 }
-            }while (endPurchase == false);
-        }else System.out.println("La floristería no tiene stock en estos momentos.\n");
+            } while (endPurchase == false);
+        } else System.out.println("La floristería no tiene stock en estos momentos.\n");
 
         ticket.calculateFinalPrice();
-        System.out.println("Precio total ticket: "+ ticket.getTotalPrice() + " €");
+        System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
         addTicket(ticket);
 
     }
@@ -290,13 +292,22 @@ public class FloristShop {
         return totalEarns;
     }
 
+    public void printInfoStock(Class<? extends Product> product) {
+        stock.stream()
+                .filter(p -> product.isInstance(p))
+                .forEach(System.out::println);
+
+
+    }
+
+
     @Override
     public String toString() {
         return "FloristShop{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", stock=" + stock +
-                ", tickets=" + tickets +
+                "id: " + id +
+                ", name: " + name + '\'' +
+                ", stock: " + stock +
+                ", tickets: " + tickets +
                 '}';
     }
 }

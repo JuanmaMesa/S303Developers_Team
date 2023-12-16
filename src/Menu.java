@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Menu {
-    
+
 
     public static void getMainMenu(ArrayList<FloristShop> floristShops) {
         boolean exit = false;
@@ -20,9 +21,9 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.addTree(floristShop.getStock());
                         }
                         break;
@@ -31,9 +32,9 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.addFlower(floristShop.getStock());
                         }
                         break;
@@ -42,9 +43,9 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.addDecoration(floristShop.getStock());
                         }
                         break;
@@ -53,27 +54,57 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.getShopStock(floristShop.getStock());
                         }
                         break;
 
-                    case 6:  // TODO Juanma Sanchez // Listar stock antes de remove
+                    case 6:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
-                            String nameProduct = Input.readString("Dime el nombre del arbol que quieres eliminiar: ");
-                        	Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
-                        	if(producto != null) {
-                        		floristShop.removeTree(producto);
-                        	}else {
-                        		System.out.println("Arbol no encontrado en el Stock");
-                        	}
+                        } else {
+                            long treeCount = floristShop.getStock().stream()
+                                    .filter(p -> p instanceof Tree)
+                                    .count();
+                            if (treeCount == 0) {
+                                System.out.println("En estos momentos no hay arboles en el Stock");
+
+                            } else {
+                                System.out.println("  --- Strock --- ");
+                                floristShop.printInfoStock(Tree.class);
+                                System.out.println();//
+                                int idProduct = Input.readInt("Dime el Id del arbol que quieres eliminiar: ");
+                                Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
+
+
+                                if (producto != null) {
+                                    boolean continueLoop = false;
+
+                                    do {
+                                        System.out.println("Estas a punto de eliminar el arbol: " + producto.getName());
+                                        String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
+                                        if (confirm.equalsIgnoreCase("si")) {
+                                            floristShop.removeTree(producto);
+                                            continueLoop = true;
+                                        } else if (confirm.equalsIgnoreCase("no")) {
+                                            System.out.println("Operacion cancelada");
+                                            continueLoop = true;
+                                        } else {
+                                            System.out.println("Opcion no valida");
+
+                                        }
+
+
+                                    } while (continueLoop == false);
+
+
+                                }
+                            }
                         }
                         break;
 
@@ -81,17 +112,17 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
-                            String nameProduct = Input.readString("Dime el nombre de la flor que quieres eliminiar: ");
-                            Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
-                        	if(producto != null) {
-                        		floristShop.removeFlower(producto);
-                        		
-                        	}else {
-                        		System.out.println("Flor no encontrada en el Stock");
-                        	}
+                        } else {
+                            int idProduct = Input.readInt("Dime el nombre de la flor que quieres eliminiar: ");
+                            Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
+                            if (producto != null) {
+                                floristShop.removeFlower(producto);
+
+                            } else {
+                                System.out.println("Flor no encontrada en el Stock");
+                            }
                         }
                         break;
 
@@ -99,26 +130,26 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
-                            String nameProduct = Input.readString("Dime el nombre de la decoración que quieres eliminiar: ");
-                            Product producto = floristShop.findProduct(floristShop.getStock(), nameProduct);
-                        	if(producto != null) {
-                        		floristShop.removeDecoration(producto);
-                        	}else {
-                        		System.out.println("Decoración no encontrada en el Stock");
-                        	}
-                        } 
+                        } else {
+                            int idProduct = Input.readInt("Dime el nombre de la decoración que quieres eliminiar: ");
+                            Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
+                            if (producto != null) {
+                                floristShop.removeDecoration(producto);
+                            } else {
+                                System.out.println("Decoración no encontrada en el Stock");
+                            }
+                        }
                         break;
 
                     case 9:  // TODO  Juanma Sanchez
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.getShopStockWithQuantity();
                         }
                         break;
@@ -126,19 +157,19 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
-                           System.out.println("Valor Total del stock: "+floristShop.getTotalValue(floristShop.getStock()) + " €");
+                        } else {
+                            System.out.println("Valor Total del stock: " + floristShop.getTotalValue(floristShop.getStock()) + " €");
                         }
                         break;
                     case 11:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.createPurchaseTicket(floristShop.getStock());
                         }
                         break;
@@ -146,9 +177,9 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
+                        } else {
                             floristShop.getPurchaseTickets(floristShop.getTickets());
                         }
                         break;
@@ -156,12 +187,30 @@ public class Menu {
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if(floristShop == null){
+                        if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
-                        } else{
-                           System.out.println("Suma total de ventas: "+ floristShop.getSalesProfits(floristShop.getTickets()) + " €");
+                        } else {
+                            System.out.println("Suma total de ventas: " + floristShop.getSalesProfits(floristShop.getTickets()) + " €");
                         }
                         break;
+                    case 14:
+                        shopName = Main.nameFloristShop();
+                        floristShop = Main.findFlowerShop(floristShops, shopName);
+
+                        if (floristShop == null) {
+                            System.out.println("Floristería no encontrada.");
+                        } else {
+                            FileManager fileManager = new FileManager();
+                            String name = "Data/"+ shopName +".txt";
+                            try {
+                                fileManager.saveData(floristShop, name);
+                                System.out.println("Stock guardado correctamente");
+                            } catch (IOException e) {
+                                System.out.println("Error al guardar el stock: " + e.getMessage());
+                            }
+                        }
+                        break;
+
                     case 0:
                         System.out.println("Saliendo de la aplicación.");
                         exit = true;
@@ -174,7 +223,7 @@ public class Menu {
     }
 
     public static byte menu() {
-        byte option =-1;
+        byte option = -1;
         boolean numCorrect = false;
 
         do {
@@ -192,20 +241,21 @@ public class Menu {
             System.out.println("11. Crear ticket de compra.");
             System.out.println("12. Mostrar compras antiguas.");
             System.out.println("13. Ver ganacias de floristería.");
+            System.out.println("14. Actualizar Stock de la floristería.");
             System.out.println("0.  Salir de la aplicación.\n");
 
-                try {
-                    option = Input.readByte("Introduce una opcion: ");
-                    Input.input();
-                    if (option < 0 || option > 13) {
-                        System.out.println("Opción no válida");
-                    }
-                    numCorrect = true;
-                } catch (InputMismatchException e) {
-                    System.out.println("Opcion no valida");
+            try {
+                option = Input.readByte("Introduce una opcion: ");
+                Input.input();
+                if (option < 0 || option > 14) {
+                    System.out.println("Opción no válida");
                 }
+                numCorrect = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Opcion no valida");
+            }
 
-        } while (option < 0 || option > 13);
+        } while (option < 0 || option > 14);
 
         return option;
     }
@@ -213,13 +263,13 @@ public class Menu {
     public static void createFloristShop(ArrayList<FloristShop> floristShops) {
         String inputName = Input.readString("Introduce el nombre de la floristería: ");
         FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
-        if(floristShop == null){
+        if (floristShop == null) {
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
             System.out.println(floristShop.getName());
             floristShops.add(floristShop);
-        } else{
-            System.out.println("Ya existe una floristería con el nombre "+floristShop.getName()+".");
+        } else {
+            System.out.println("Ya existe una floristería con el nombre " + floristShop.getName() + ".");
         }
     }
 
