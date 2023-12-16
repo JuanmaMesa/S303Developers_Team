@@ -1,6 +1,4 @@
-Tree{id: 10, name: pino, price: 5.0, height: 9.0}
-Flower{id=11, name='rosa, price=8.0, color=red}
-Flower{id=12, name='periwinkle, price=6.0, color=violet}
-Tree{id: 13, name: palmera, price: 12.0, height: 23.0}
-Decoration{id=14, name='mueble, price=40.0, material=madera}
-Ticket{id=1, products=[Tree{id: 0, name: pino, price: 5.0, height: 9.0}, Flower{id=1, name='rosa, price=8.0, color=red}, Flower{id=2, name='periwinkle, price=6.0, color=violet}, Tree{id: 3, name: palmera, price: 12.0, height: 23.0}, Decoration{id=4, name='mueble, price=40.0, material=madera}, Tree{id: 5, name: christmas tree, price: 78.0, height: 50.0}, Flower{id=6, name='tulipan, price=8.0, color=yellow}, Flower{id=7, name='girasol, price=6.0, color=orange}, Tree{id: 8, name: almendro, price: 12.0, height: 23.0}, Decoration{id=9, name='escritorio, price=27.0, material=madera}], totalPrice=202.0}
+FLOWER,Flower{id=11, name='rosa, price=8.0, color=red}
+FLOWER,Flower{id=12, name='periwinkle, price=6.0, color=violet}
+TREE,Tree{id: 13, name: palmera, price: 12.0, height: 23.0}
+DECORATION,Decoration{id=14, name='mueble, price=40.0, material=madera}
