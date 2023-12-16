@@ -64,6 +64,7 @@ public class Menu {
                     case 6:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
+                        boolean continueLoop = false;
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -75,34 +76,37 @@ public class Menu {
                                 System.out.println("En estos momentos no hay arboles en el Stock");
 
                             } else {
+                                do {
                                 System.out.println("  --- Stock --- ");
                                 floristShop.printInfoStock(Tree.class);
                                 System.out.println();//
 
-                                int idProduct = Input.readInt("Dime el Id del arbol que quieres eliminiar: ");
-                                Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
 
-                                if (producto == null) {
-                                    System.out.println("Producto no encontrado con el Id: "+ idProduct);
-                                }
-                                else{
-                                    boolean continueLoop = false;
+                                    try {
+                                        int idProduct = Input.readInt("Dime el Id del árbol que quieres eliminar: ");
+                                        Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
 
-                                    do {
-                                        System.out.println("Estas a punto de eliminar el arbol: " + producto.getName());
-                                        String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
-                                        if (confirm.equalsIgnoreCase("si")) {
-                                            floristShop.removeTree(producto);
-                                            continueLoop = true;
-                                        } else if (confirm.equalsIgnoreCase("no")) {
-                                            System.out.println("Operacion cancelada");
-                                            continueLoop = true;
+                                        if (producto == null) {
+                                            System.out.println("Producto no encontrado con el Id: " + idProduct);
                                         } else {
-                                            System.out.println("Opcion no valida");
-                                        }
+                                            System.out.println("Estás a punto de eliminar el árbol: " + producto.getName());
+                                            String confirm = Input.readString("¿Estás seguro de eliminarlo? Si/No ");
 
-                                    } while (continueLoop == false);
-                                }
+                                            if (confirm.equalsIgnoreCase("si")) {
+                                                floristShop.removeTree(producto);
+                                                continueLoop = true;
+                                            } else if (confirm.equalsIgnoreCase("no")) {
+                                                System.out.println("Operación cancelada");
+                                                continueLoop = true;
+                                            } else {
+                                                System.out.println("Opción no válida");
+                                            }
+                                        }
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Error: Ingresa un valor válido para el Id.");
+                                        continueLoop = false;
+                                    }
+                                } while (!continueLoop);
                             }
                         }
                         break;
@@ -110,6 +114,7 @@ public class Menu {
                     case 7:
                         shopName = Main.nameFloristShop();
                         floristShop = Main.findFlowerShop(floristShops, shopName);
+                        continueLoop = false;
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -117,36 +122,38 @@ public class Menu {
                             long flowerCount = floristShop.getStock().stream()
                                     .filter(p -> p instanceof Flower)
                                     .count();
+
                             if (flowerCount == 0) {
-                                System.out.println("En estos momentos no hay Flores en el Stock");
-
+                                System.out.println("En estos momentos no hay flores en el stock.");
                             } else {
-                                System.out.println("  --- Stock --- ");
-                                floristShop.printInfoStock(Flower.class);
-                                System.out.println();//
-                                int idProduct = Input.readInt("Dime el Id de la Flor que quieres eliminiar: ");
-                                Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
+                                do {
+                                    try {
+                                        System.out.println("  --- Stock --- ");
+                                        floristShop.printInfoStock(Flower.class);
+                                        System.out.println();
+                                        int idProduct = Input.readInt("Dime el Id de la flor que quieres eliminar: ");
+                                        Product producto = floristShop.findProduct(floristShop.getStock(), idProduct);
 
-                                if (producto == null) {
-                                    System.out.println("Producto no encontrado con el Id: "+ idProduct);
-                                }else{
-                                    boolean continueLoop = false;
-
-                                    do {
-                                        System.out.println("Estas a punto de eliminar la flor: " + producto.getName());
-                                        String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
-                                        if (confirm.equalsIgnoreCase("si")) {
-                                            floristShop.removeFlower(producto);
-                                            continueLoop = true;
-                                        } else if (confirm.equalsIgnoreCase("no")) {
-                                            System.out.println("Operacion cancelada");
-                                            continueLoop = true;
+                                        if (producto == null) {
+                                            System.out.println("Producto no encontrado con el Id: " + idProduct);
                                         } else {
-                                            System.out.println("Opcion no valida");
-
+                                            System.out.println("Estás a punto de eliminar la flor: " + producto.getName());
+                                            String confirm = Input.readString("¿Estás seguro de eliminarlo? Si/NO ");
+                                            if (confirm.equalsIgnoreCase("si")) {
+                                                floristShop.removeFlower(producto);
+                                                continueLoop = true;
+                                            } else if (confirm.equalsIgnoreCase("no")) {
+                                                System.out.println("Operación cancelada");
+                                                continueLoop = true;
+                                            } else {
+                                                System.out.println("Opción no válida");
+                                            }
                                         }
-                                    } while (continueLoop == false);
-                                }
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Error: Ingresa un valor válido para el Id.");
+                                        continueLoop = false;
+                                    }
+                                } while (!continueLoop);
                             }
                         }
                         break;
@@ -163,8 +170,10 @@ public class Menu {
                                     .count();
                             if (decorationCount == 0) {
                                 System.out.println("En estos momentos no hay decoracion en el Stock");
-
                             } else {
+                                continueLoop = false;
+                                do {
+                                    try{
                                 System.out.println("  --- Stock --- ");
                                 floristShop.printInfoStock(Decoration.class);
                                 System.out.println();//
@@ -175,9 +184,7 @@ public class Menu {
                                     System.out.println("Producto no encontrado con el Id: "+ idProduct);
 
                                 }else{
-                                    boolean continueLoop = false;
 
-                                    do {
                                         System.out.println("Estas a punto de eliminar la decoracion: " + producto.getName());
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
@@ -188,10 +195,13 @@ public class Menu {
                                             continueLoop = true;
                                         } else {
                                             System.out.println("Opcion no valida");
-
                                         }
-                                    } while (continueLoop == false);
                                 }
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Error: Ingresa un valor válido para el Id.");
+                                        continueLoop = false;
+                                    }
+                                } while (!continueLoop);
                             }
                         }
                         break;

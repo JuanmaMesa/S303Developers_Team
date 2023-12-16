@@ -5,8 +5,7 @@ public class Data {
 
 	private ArrayList<Product> allProducts = new ArrayList<Product>();
 	private ArrayList<FloristShop> floristerias = new ArrayList<FloristShop>();
-	
-	
+
 	public void loadShop() {
 		FloristShop fh1 = new FloristShop("Rosas del valle");
 		FloristShop fh2 = new FloristShop("Rosas del bosque");
@@ -56,8 +55,4 @@ public class Data {
 	public ArrayList<FloristShop> getFloristerias() {
 		return floristerias;
 	}
-	
-	
-	
-
 }
