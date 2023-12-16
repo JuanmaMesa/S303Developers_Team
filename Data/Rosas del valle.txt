@@ -1,4 +1,3 @@
-FLOWER,Flower{id=11, name='rosa, price=8.0, color=red}
+TREE,Tree{id: 10, name: pino, price: 5.0, height: 9.0}
 FLOWER,Flower{id=12, name='periwinkle, price=6.0, color=violet}
 TREE,Tree{id: 13, name: palmera, price: 12.0, height: 23.0}
-DECORATION,Decoration{id=14, name='mueble, price=40.0, material=madera}

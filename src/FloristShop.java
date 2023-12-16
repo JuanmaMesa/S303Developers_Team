@@ -49,14 +49,11 @@ public class FloristShop {
                 .filter(n -> n.getId() == (id_product))
                 .findFirst()
                 .orElse(null);
-
     }
 
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
-
     }
-
 
     public void addTree(ArrayList<Product> stock) {
         String nameTree = Input.readString("Introduce el nombre del árbol: ");
@@ -202,7 +199,6 @@ public class FloristShop {
         }
     }
 
-
     public void getShopStockWithQuantity() {
         int indiceTree = 0;
         int indiceFlower = 0;
@@ -297,9 +293,7 @@ public class FloristShop {
                 .filter(p -> product.isInstance(p))
                 .forEach(System.out::println);
 
-
     }
-
 
     @Override
     public String toString() {
