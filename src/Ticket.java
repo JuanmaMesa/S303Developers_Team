@@ -26,6 +26,9 @@ public class Ticket {
     public double getTotalPrice() {
         return totalPrice;
     }
+    public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
+
+
 
 
     public void addProduct(Product p) {

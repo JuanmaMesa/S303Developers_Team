@@ -10,14 +10,19 @@ public class FileManager {
             // guardar informacion en el archivo
             for (Product product : floristShop.getStock()) {
                 if (product instanceof Tree) {
-                    printWriter.println(("TREE," + product.toString()));
+                    printWriter.println((product.toString()));
                 } else if (product instanceof Flower) {
-                    printWriter.println(("FLOWER," + product.toString()));
+                    printWriter.println(( product.toString()));
                 } else if (product instanceof Decoration) {
-                    printWriter.println(("DECORATION," + product.toString()));
+                    printWriter.println((product.toString()));
                 }
 
             }
+            for(Ticket ticket : floristShop.getTickets()){
+                printWriter.println(ticket.toString());
+            }
+
+
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         }
@@ -42,6 +47,9 @@ public class FileManager {
                 } else if (parts[0].equalsIgnoreCase("Decoration")) {
                     Decoration decoration = parseDecoration(parts);
                     products.add(decoration);
+                }else if  (parts[0].equalsIgnoreCase("Ticket")){
+                    Ticket ticket = parseTicket(parts);
+                    tickets.add(ticket);
                 }
             }
         }
@@ -83,9 +91,44 @@ public class FileManager {
 
     }
 
+    private Ticket parseTicket(String [] parts){
+        Ticket ticket = new Ticket();
+        List<Product> products = new ArrayList<>();
 
+        // Extraer la lista de productos del ticket
+        String productList = parts[2].substring(parts[2].indexOf('[')+1, parts[2].lastIndexOf(']'));
+        String[] productParts = productList.split("\\},");
 
+        for(String productStr : productParts){
+            productStr = productStr.trim();
+            if(!productStr.endsWith("}")){
+                productStr += "}";
+            }
+            String [] productData = productStr.split(",");
 
+            if(productData[0].equalsIgnoreCase("Tree")){
+                Tree tree = parseTree(productData);
+                products.add(tree);
+            } else if (productData[0].equalsIgnoreCase("Flower")) {
+                Flower flower = parseFlower(productData);
+                products.add(flower);
+            } else if(productData[0].equalsIgnoreCase("Decoration")){
+                Decoration decoration = parseDecoration(productData);
+                products.add(decoration);
+            }
 
+        }
+
+        // añadir productos al ticket
+        for(Product product : products){
+            ticket.addProduct(product);
+        }
+
+        // Establecer precio total del ticket
+        double totalPrice = Double.parseDouble(parts[3].split(":")[1].trim());
+        ticket.setTotalPrice(totalPrice);
+
+        return ticket;
+    }
 
 }
