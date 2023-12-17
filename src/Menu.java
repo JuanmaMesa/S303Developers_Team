@@ -54,19 +54,35 @@ public class Menu {
                         break;
 
                     case 5:
-                        shopName = Main.nameFloristShop();
-                        floristShop = Main.findFlowerShop(floristShops, shopName);
+                        //shopName = Main.nameFloristShop();
+                        //floristShop = Main.findFlowerShop(floristShops, shopName);
 
-                        if (floristShop == null) {
-                            System.out.println("Floristería no encontrada.");
-                        } else {
-                            floristShop = LoadFile(shopName);
-                            if (floristShop != null) {
-                                floristShop.getShopStock(floristShop.getStock());
-                            } else {
-                                System.out.println("Error al cargar los datos");
+                        //if (floristShop == null) {
+                          //  System.out.println("Floristería no encontrada.");
+                        //} else {
+
+                            String shopNames = Main.nameFloristShop();
+                            String file  = "Data/"+shopNames+".txt";
+
+                            FileManager fileManager = new FileManager();
+                            try {
+                                FloristShop shop = fileManager.loadData(file);
+                                System.out.println(shop);
+                                shop.getShopStock(shop.getStock());
+                                shop.getName();
+
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
-                        }
+
+                            //floristShop = LoadFile(shopName);
+                            //if (floristShop != null) {
+                              // floristShop.getShopStock(floristShop.getStock());
+                            //} else {
+                                System.out.println("Error al cargar los datos");
+                            //}
+                        //}
                         break;
 
                     case 6:
@@ -268,11 +284,22 @@ public class Menu {
                         }
                         break;
                     case 15:
-                        FileManager fileManager = new FileManager();
-                        try {
-                            FloristShop shop = fileManager.loadData("Data/Rosas del bosque.txt");
+                        String shopNames2 = Main.nameFloristShop();
+                        String file2  = "Data/"+shopNames2+".txt";
 
-                            System.out.println(shop);
+                        FileManager fileManager2 = new FileManager();
+                        try {
+                            FloristShop shop = fileManager2.loadData(file2);
+
+                            for(Product s:shop.getStock()){
+                                System.out.println(s);
+                            }
+                            ArrayList<Product> productos = shop.getStock();
+                            for(Product p : productos){
+                                System.out.println(p.toString());
+                            }
+
+
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -390,19 +417,38 @@ public class Menu {
     }
 
     public static FloristShop LoadFile(String shopName) {
+
+
+
+
         FileManager fileManager = new FileManager();
-        String name = "Data/" + shopName + ".txt";
         FloristShop floristShop = null;
         try {
-            floristShop = fileManager.loadData(name);
+            floristShop = fileManager.loadData(shopName);
             System.out.println("cargado corectamente");
-
         } catch (IOException e) {
-            System.out.println("Error de lectura ");
 
+        } catch (Exception e){
+            System.out.println("Fallo de lectura");
         }
         return floristShop;
     }
+public static void load(){
 
+    String shopNames = Main.nameFloristShop();
+    String file  = "Data/"+shopNames+".txt";
+
+    FileManager fileManager = new FileManager();
+    try {
+        FloristShop shop = fileManager.loadData(file);
+        System.out.println(shop);
+
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+}
 
 }

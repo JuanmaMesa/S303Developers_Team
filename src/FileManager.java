@@ -33,22 +33,30 @@ public class FileManager {
         ArrayList<Product> products = new ArrayList<>();
         ArrayList<Ticket> tickets = new ArrayList<>();
         //FloristShop floristShop;
-        FloristShop floristShop = new FloristShop("Rosas del bosque",products, tickets);
+        //FloristShop floristShop = null;
+        //FloristShop floristShop = new FloristShop(nameFile,products, tickets);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
+        /*try (BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line); // Imprime cada línea para verificar la lectura
             }
+        } catch (FileNotFoundException e){
+            System.out.println("El Archivo no existe " +nameFile);
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            System.out.println("Error al leer el archivo " +e.getMessage());
+        }*/
 
 
-        /*try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
             String line;
             while((line = br.readLine()) !=null){
-                String[] parts = line.split(",");
+                // eliminar los corchetes
+                line = line.replace("{","").replace("}","");
+
+                // dividir por comas y espacios
+                String [] parts = line.split(",\\s*");//",\\s*" divide por comas seguidas de cero o más espacios en blanco
+                //String[] parts = line.split(",");
                 if(parts[0].equals("Tree")){
                     Tree tree = parseTree(parts);
                     products.add(tree);
@@ -63,8 +71,8 @@ public class FileManager {
                     tickets.add(ticket);
                 }
             }
-        }*/
-        //floristShop = new FloristShop(nameFile,products,tickets);
+        }
+        FloristShop floristShop  = new FloristShop(nameFile,products,tickets);
         return floristShop;
 
     }
@@ -73,7 +81,7 @@ public class FileManager {
         String name = parts[2].split(":")[1].trim().replace("\"", "");
         double price = Double.parseDouble(parts[3].split(":")[1].trim());
         double height = Double.parseDouble(parts[4].split(":")[1].trim().replace("}", ""));
-        // Suponiendo que el constructor de Tree toma estos tres parámetros
+
         return new Tree(name, price, height);
 
     }
