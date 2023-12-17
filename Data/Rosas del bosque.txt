@@ -1,7 +1,6 @@
 Tree{id: 15, name: christmas tree, price: 78.0, height: 50.0}
 Flower{id: 16, name=: tulipan, price: 8.0, color: yellow}
-Flower{id: 17, name=: girasol, price: 6.0, color: orange}
-Tree{id: 18, name: almendro, price: 12.0, height: 23.0}
-Decoration{id: 19, name: escritorio, price:27.0, material: madera}
-Tree{id: 20, name: arbol nuevo, price: 4.0, height: 3333.0}
+Tree{id: 17, name: almendro, price: 12.0, height: 23.0}
+Decoration{id: 18, name: escritorio, price:27.0, material: madera}
+Tree{id: 19, name: muy grande, price: 55.0, height: 4.0}
 Ticket{id=2, products=[Tree{id: 0, name: pino, price: 5.0, height: 9.0}, Flower{id: 1, name=: rosa, price: 8.0, color: red}, Flower{id: 2, name=: periwinkle, price: 6.0, color: violet}, Tree{id: 3, name: palmera, price: 12.0, height: 23.0}, Decoration{id: 4, name: mueble, price:40.0, material: madera}, Tree{id: 5, name: christmas tree, price: 78.0, height: 50.0}, Flower{id: 6, name=: tulipan, price: 8.0, color: yellow}, Flower{id: 7, name=: girasol, price: 6.0, color: orange}, Tree{id: 8, name: almendro, price: 12.0, height: 23.0}, Decoration{id: 9, name: escritorio, price:27.0, material: madera}], totalPrice=202.0}

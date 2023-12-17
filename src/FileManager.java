@@ -32,9 +32,20 @@ public class FileManager {
     public FloristShop loadData(String nameFile) throws IOException{
         ArrayList<Product> products = new ArrayList<>();
         ArrayList<Ticket> tickets = new ArrayList<>();
-        FloristShop floristShop = new FloristShop(nameFile,products,tickets);
+        //FloristShop floristShop;
+        FloristShop floristShop = new FloristShop("Rosas del bosque",products, tickets);
 
-        try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line); // Imprime cada línea para verificar la lectura
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        /*try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
             String line;
             while((line = br.readLine()) !=null){
                 String[] parts = line.split(",");
@@ -52,22 +63,18 @@ public class FileManager {
                     tickets.add(ticket);
                 }
             }
-        }
+        }*/
+        //floristShop = new FloristShop(nameFile,products,tickets);
         return floristShop;
-
-
-
-
 
     }
 
     private Tree parseTree(String[] parts){
-        int id = Integer.parseInt(parts[1].split(":")[1].trim());
-        String name = parts[2].split(":")[1].trim();
+        String name = parts[2].split(":")[1].trim().replace("\"", "");
         double price = Double.parseDouble(parts[3].split(":")[1].trim());
-        double height = Double.parseDouble((parts[4]).split(":")[1].trim());
-
-        return new Tree(name,price,height);
+        double height = Double.parseDouble(parts[4].split(":")[1].trim().replace("}", ""));
+        // Suponiendo que el constructor de Tree toma estos tres parámetros
+        return new Tree(name, price, height);
 
     }
 
@@ -106,13 +113,13 @@ public class FileManager {
             }
             String [] productData = productStr.split(",");
 
-            if(productData[0].equalsIgnoreCase("Tree")){
+            if(productData[0].equals("Tree")){
                 Tree tree = parseTree(productData);
                 products.add(tree);
-            } else if (productData[0].equalsIgnoreCase("Flower")) {
+            } else if (productData[0].equals("Flower")) {
                 Flower flower = parseFlower(productData);
                 products.add(flower);
-            } else if(productData[0].equalsIgnoreCase("Decoration")){
+            } else if(productData[0].equals("Decoration")){
                 Decoration decoration = parseDecoration(productData);
                 products.add(decoration);
             }
@@ -130,5 +137,7 @@ public class FileManager {
 
         return ticket;
     }
+
+
 
 }
