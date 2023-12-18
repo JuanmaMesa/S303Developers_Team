@@ -12,9 +12,6 @@ public class Menu {
         FloristShop floristShop;
         String shopName = "";
 
-        FileSer fs = new FileSer();
-
-
         do {
             try {
                 switch (menu()) {
@@ -29,7 +26,6 @@ public class Menu {
                             if (floristShop != null) {
                                 floristShop.addTree(floristShop.getStock());
                                 saveFloristShop(floristShop, shopName);
-                                //System.out.println(floristShop.getStock());
                             } else {
                                 System.out.println("Floristeria no encontrada");
                             }
@@ -50,16 +46,13 @@ public class Menu {
                         } else {
                             floristShop.addFlower(floristShop.getStock());
                             saveFloristShop(floristShop, shopName);
-
                         }
                         break;
 
                     case 4:
                         shopName = Main.nameFloristShop();
                         floristShop = loadFloristShop(shopName);
-
-                        // floristShop = Main.findFlowerShop(floristShops, shopName);
-
+                        // floristShop = Main.findFlowerShop(floristShops, shopName);-> antiguo metodo para cargar datos
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
@@ -130,7 +123,6 @@ public class Menu {
                     case 7:
                         shopName = Main.nameFloristShop();
                         floristShop = loadFloristShop(shopName);
-                        //floristShop = Main.findFlowerShop(floristShops, shopName);
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -176,7 +168,6 @@ public class Menu {
                     case 8:
                         shopName = Main.nameFloristShop();
                         floristShop = loadFloristShop(shopName);
-                        //floristShop = Main.findFlowerShop(floristShops, shopName);
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -223,7 +214,6 @@ public class Menu {
                     case 9:
                         shopName = Main.nameFloristShop();
                         floristShop = loadFloristShop(shopName);
-                        //floristShop = Main.findFlowerShop(floristShops, shopName);
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -232,10 +222,8 @@ public class Menu {
                         }
                         break;
                     case 10:
-
                         shopName = Main.nameFloristShop();
                         floristShop = loadFloristShop(shopName);
-                        //floristShop = Main.findFlowerShop(floristShops, shopName);
 
                         if (floristShop == null) {
                             System.out.println("Floristería no encontrada.");

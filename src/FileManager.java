@@ -77,37 +77,5 @@ public class FileManager {
         }
     }
 
-
-
-
-
-   /* public void serializeObject(Object obj, String filepath) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
-            out.writeObject(obj);
-            System.out.println("Object serialitzed and saved in "+ filepath);
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-
-    }*/
-
-   /* public Object desSerializeObject(String filePath) {
-
-        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
-
-            Object obj = in.readObject();
-            System.out.println("Object desrialized from "+filePath);
-            return obj;
-        }catch( IOException e) {
-            System.out.println("IOException: ");
-            return null;
-        }catch( ClassNotFoundException e) {
-            System.out.println("ClassNotFoundException:");
-            return null;
-        }
-
-    }*/
-
 }
 
