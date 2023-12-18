@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ticket {
+public class Ticket implements Serializable {
     private static int lastId = 0;
     private int id;
     private ArrayList<Product> products;

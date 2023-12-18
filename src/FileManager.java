@@ -1,151 +1,113 @@
-import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class FileManager {
 
-    public void saveData(FloristShop floristShop, String nameFile) throws IOException {
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(nameFile))){
+    private String filePath;
+    private boolean append;
 
-            // guardar informacion en el archivo
-            for (Product product : floristShop.getStock()) {
-                if (product instanceof Tree) {
-                    printWriter.println((product.toString()));
-                } else if (product instanceof Flower) {
-                    printWriter.println(( product.toString()));
-                } else if (product instanceof Decoration) {
-                    printWriter.println((product.toString()));
-                }
+    public FileManager(String filePath, boolean append) {
 
-            }
-            for(Ticket ticket : floristShop.getTickets()){
-                printWriter.println(ticket.toString());
-            }
+        this.filePath = filePath;
+        this.append= append;
+    }
 
+    public void saveToFile(String data) {
+        try {
+            FileWriter filewriter = new FileWriter(filePath, append);
+            BufferedWriter writer = new BufferedWriter(filewriter);
+            writer.write(data);
+            writer.close();
 
-        } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+        }catch(IOException e) {
+
+            System.out.println("IOException: Error the file can't to save.");
+            e.printStackTrace();
         }
 
     }
 
-    public FloristShop loadData(String nameFile) throws IOException{
-        ArrayList<Product> products = new ArrayList<>();
-        ArrayList<Ticket> tickets = new ArrayList<>();
-        //FloristShop floristShop;
-        //FloristShop floristShop = null;
-        //FloristShop floristShop = new FloristShop(nameFile,products, tickets);
+    public String readFromFile() {
 
-        /*try (BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder content = new StringBuilder();
             String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line); // Imprime cada línea para verificar la lectura
+
+            while((line = reader.readLine()) != null){
+                content.append(line).append("\n");
+
             }
-        } catch (FileNotFoundException e){
-            System.out.println("El Archivo no existe " +nameFile);
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo " +e.getMessage());
-        }*/
+            return content.toString();
+        }catch(IOException e) {
 
-
-        try(BufferedReader br = new BufferedReader(new FileReader(nameFile))) {
-            String line;
-            while((line = br.readLine()) !=null){
-                // eliminar los corchetes
-                line = line.replace("{","").replace("}","");
-
-                // dividir por comas y espacios
-                String [] parts = line.split(",\\s*");//",\\s*" divide por comas seguidas de cero o más espacios en blanco
-                //String[] parts = line.split(",");
-                if(parts[0].equals("Tree")){
-                    Tree tree = parseTree(parts);
-                    products.add(tree);
-                } else if (parts[0].equalsIgnoreCase("Flower")) {
-                    Flower flower = parseFlower(parts);
-                    products.add(flower);
-                } else if (parts[0].equalsIgnoreCase("Decoration")) {
-                    Decoration decoration = parseDecoration(parts);
-                    products.add(decoration);
-                }else if  (parts[0].equalsIgnoreCase("Ticket")){
-                    Ticket ticket = parseTicket(parts);
-                    tickets.add(ticket);
-                }
-            }
+            System.out.println("IOEXception: Error reading the file");
+            e.printStackTrace();
+            return null;
         }
-        FloristShop floristShop  = new FloristShop(nameFile,products,tickets);
-        return floristShop;
-
     }
 
-    private Tree parseTree(String[] parts){
-        String name = parts[2].split(":")[1].trim().replace("\"", "");
-        double price = Double.parseDouble(parts[3].split(":")[1].trim());
-        double height = Double.parseDouble(parts[4].split(":")[1].trim().replace("}", ""));
-
-        return new Tree(name, price, height);
-
+    public void serializeObject(FloristShop shops, String filepath) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
+            out.writeObject(shops);
+            System.out.println("List of shops serialized and saved in " + filepath);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private Flower parseFlower(String[] parts){
-        int id = Integer.parseInt(parts[1].split(":")[1].trim());
-        String name = parts[2].split(":")[1].trim();
-        double price = Double.parseDouble(parts[3].split(":")[1].trim());
-        String  colour = parts[4].split(":")[1].trim();
 
-        return new Flower(name,price,colour);
 
+    public Object desSerializeObject(String filePath) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
+            FloristShop shops = (FloristShop) in.readObject();
+            System.out.println("List of shops deserialized from " + filePath);
+            return shops;
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
 
-    private Decoration parseDecoration(String[] parts){
-        int id = Integer.parseInt(parts[1].split(":")[1].trim());
-        String name = parts[2].split(":")[1].trim();
-        double price = Double.parseDouble(parts[3].split(":")[1].trim());
-        String material = parts[4].split(":")[1].trim();
 
-        return new Decoration(name,price,material);
 
-    }
 
-    private Ticket parseTicket(String [] parts){
-        Ticket ticket = new Ticket();
-        List<Product> products = new ArrayList<>();
 
-        // Extraer la lista de productos del ticket
-        String productList = parts[2].substring(parts[2].indexOf('[')+1, parts[2].lastIndexOf(']'));
-        String[] productParts = productList.split("\\},");
+   /* public void serializeObject(Object obj, String filepath) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
+            out.writeObject(obj);
+            System.out.println("Object serialitzed and saved in "+ filepath);
 
-        for(String productStr : productParts){
-            productStr = productStr.trim();
-            if(!productStr.endsWith("}")){
-                productStr += "}";
-            }
-            String [] productData = productStr.split(",");
-
-            if(productData[0].equals("Tree")){
-                Tree tree = parseTree(productData);
-                products.add(tree);
-            } else if (productData[0].equals("Flower")) {
-                Flower flower = parseFlower(productData);
-                products.add(flower);
-            } else if(productData[0].equals("Decoration")){
-                Decoration decoration = parseDecoration(productData);
-                products.add(decoration);
-            }
-
+        }catch(IOException e){
+            e.printStackTrace();
         }
 
-        // añadir productos al ticket
-        for(Product product : products){
-            ticket.addProduct(product);
+    }*/
+
+   /* public Object desSerializeObject(String filePath) {
+
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
+
+            Object obj = in.readObject();
+            System.out.println("Object desrialized from "+filePath);
+            return obj;
+        }catch( IOException e) {
+            System.out.println("IOException: ");
+            return null;
+        }catch( ClassNotFoundException e) {
+            System.out.println("ClassNotFoundException:");
+            return null;
         }
 
-        // Establecer precio total del ticket
-        double totalPrice = Double.parseDouble(parts[3].split(":")[1].trim());
-        ticket.setTotalPrice(totalPrice);
-
-        return ticket;
-    }
-
-
+    }*/
 
 }
+

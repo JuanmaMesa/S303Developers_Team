@@ -1,12 +1,13 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import javax.management.ObjectInstance;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class FloristShop {
+public class FloristShop implements Serializable {
     private static int lastId = 0;
     private int id;
     private String name;
@@ -168,7 +169,7 @@ public class FloristShop {
         if (stock.isEmpty()) {
             System.out.println("No hay stock en la floristería " + name + ".");
         } else {
-            System.out.println("El stock disponible en la floristería " + name + " es:");
+            System.out.println("\nEl stock disponible en la floristería " + name + " es:\n");
             stock.forEach(product -> System.out.println(product));
         }
     }
@@ -228,9 +229,9 @@ public class FloristShop {
     }
 
     public double getTotalValue(ArrayList<Product> stock) {
-        //TODO valor total stock
+
         double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
-        // TODO sysout con totalValue
+
         return totalValue;
     }
 
@@ -267,7 +268,7 @@ public class FloristShop {
                     endPurchase = true;
                 }
             } while (endPurchase == false);
-        } else System.out.println("La floristería no tiene stock en estos momentos.\n");
+        } else System.out.println("La floristería no tiene stock en estos momentos.");
 
         ticket.calculateFinalPrice();
         System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
@@ -276,10 +277,9 @@ public class FloristShop {
     }
 
     public void getPurchaseTickets(ArrayList<Ticket> tickets) {
-        //TODO Linkar con stock de floristShop
 
         for (Ticket t : tickets) {
-            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: ");
+            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: \n");
             t.getProducts().forEach((p) -> System.out.println("- " + p.getName()));
             System.out.println("Precio Total de la compra: " + t.getTotalPrice() + " €\n");
         }
