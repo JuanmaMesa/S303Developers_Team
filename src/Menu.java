@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 public class Menu {
 
 
-    public static void getMainMenu(ArrayList<FloristShop> floristShops) {
+    public static void getMainMenu(ArrayList<String> floristShops) {
         boolean exit = false;
         FloristShop floristShop = new FloristShop();
         String shopName = "";
@@ -19,30 +19,28 @@ public class Menu {
 
                     case 2:
                         shopName = Main.nameFloristShop();
-
-
-                        File file = new File("Data/" + shopName + ".txt");
-                        try {
-
-                        if (file.length() == 0L) {
-                            System.out.println("File is empty");
+                        String nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        if (nameFloristShop == null) {
+                            System.out.println("Floristería no encontrada.");
                         } else {
-                            floristShop = loadFloristShop(shopName);
-                        }
-                        //floristShop = loadFloristShop(shopName);
-                                if (floristShop != null) {
-                                    floristShop.addTree(floristShop.getStock());
-                                    saveFloristShop(floristShop, shopName);
-                                } else {
-                                    System.out.println("Floristeria no encontrada");
-                                }
-
-                            } catch (FileNotFoundException e) {
-                                System.out.println("archivo no encontrado");
-                            } catch (Exception e) {
-                                System.out.println("Floristería no encontrada.");
+                            File file = new File("Data/" + shopName + ".txt");
+                        try {
+                            if (file.length() == 0L) {
+                                System.out.println("File is empty");
+                                FloristShop floristShop22 = new FloristShop(shopName);
+                                floristShop22.addTree(floristShop22.getStock());
+                                saveFloristShop(floristShop22, shopName);
+                            } else {
+                                floristShop = loadFloristShop(shopName);
+                                floristShop.addTree(floristShop.getStock());
+                                saveFloristShop(floristShop, shopName);
                             }
 
+
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                        }
                         break;
 
                     case 3:
@@ -71,16 +69,29 @@ public class Menu {
 
                     case 5:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
-                            floristShop.getShopStock(floristShop.getStock());
-                            floristShop.getPurchaseTickets(floristShop.getTickets());
+                            File file = new File("Data/" + shopName + ".txt");
+                            try {
+                                if (file.length() == 0L) {
+                                    System.out.println("File is empty");
 
+                                } else {
+                                    floristShop = loadFloristShop(shopName);
+                                    floristShop.getShopStock(floristShop.getStock());
+                                }
+
+
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                         break;
+
+
 
                     case 6:
                         shopName = Main.nameFloristShop();
@@ -321,21 +332,23 @@ public class Menu {
         return option;
     }
 
-    public static void createFloristShop(ArrayList<FloristShop> floristShops) {
+    public static void createFloristShop(ArrayList<String> floristShops) {
         String inputName = Input.readString("Introduce el nombre de la floristería: ");
-        FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
-        if (floristShop == null) {
+        String floristShopString = Main.findFlowerShopString(floristShops ,inputName);
+
+        //FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
+        if (floristShopString == null) {
+            FloristShop floristShop = new FloristShop(inputName);
+            System.out.println("Creada nueva floristería:");
+            System.out.println(floristShop.getName());
+            floristShops.add(floristShopString);
             try {
                 createFile(inputName);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            floristShop = new FloristShop(inputName);
-            System.out.println("Creada nueva floristería:");
-            System.out.println(floristShop.getName());
-            floristShops.add(floristShop);
         } else {
-            System.out.println("Ya existe una floristería con el nombre " + floristShop.getName() + ".");
+            System.out.println("Ya existe una floristería con el nombre " + floristShopString + ".");
         }
     }
 
@@ -385,14 +398,14 @@ public class Menu {
         String filepath = "Data/" + shopName + ".txt";
         File file = new File(filepath);
         BufferedWriter bw;
-        if (file.exists()) {
-            System.out.println("El fichero ya existe");
+        //if (file.exists()) {
+          //  System.out.println("El fichero ya existe");
 
-        } else {
+        //} else {
             // El fichero no existe y hay que crearlo
             bw = new BufferedWriter(new FileWriter(file));
-            bw.close(); // Debe cerrarse la escritura del fichero
-        }
+            bw.close();
+      //  }
     }
 
 }
