@@ -54,6 +54,22 @@ public class FileManager {
         }
     }
 
+    public  void saveLastId(FloristShop shop, String filepath){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
+            ArrayList<Product> products = shop.getStock();
+            Product p = products.get(-1);
+            out.writeObject(p.getLastId());
+            System.out.println("List of shops serialized and saved in " + filepath);
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadLastId(String filePath){
+
+    }
+
     public void serializeObject(FloristShop shops, String filepath) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
             out.writeObject(shops);

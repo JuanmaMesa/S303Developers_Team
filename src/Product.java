@@ -16,6 +16,14 @@ public class Product implements Serializable{
         return id;
     }
 
+    public int getLastId() {
+        return lastId;
+    }
+
+    public void setLastId(int lastId) {
+        Product.lastId = lastId;
+    }
+
     public String getName() {
         return name;
     }

@@ -7,8 +7,8 @@ public class Main {
         Data data = new Data();
 
 
-        data.loadProducts();
-        data.loadShop();
+        //data.loadProducts();
+        //data.loadShop();
         ArrayList<FloristShop> floristShops = data.getFloristerias();
     
         Menu.getMainMenu(floristShops);

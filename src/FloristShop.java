@@ -26,6 +26,13 @@ public class FloristShop implements Serializable {
         this.stock = stock;
         this.tickets = tickets;
     }
+    public FloristShop(){
+
+    }
+
+    public static void setLastId(int lastId) {
+      FloristShop.lastId = lastId;
+    }
 
     public String getName() {
         return name;

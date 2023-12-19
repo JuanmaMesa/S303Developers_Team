@@ -1,15 +1,13 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Menu {
 
 
-    public static void getMainMenu(ArrayList<FloristShop> floristShops)  {
+    public static void getMainMenu(ArrayList<FloristShop> floristShops) {
         boolean exit = false;
-        FloristShop floristShop;
+        FloristShop floristShop = new FloristShop();
         String shopName = "";
 
         do {
@@ -21,20 +19,30 @@ public class Menu {
 
                     case 2:
                         shopName = Main.nameFloristShop();
+
+
+                        File file = new File("Data/" + shopName + ".txt");
                         try {
+
+                        if (file.length() == 0L) {
+                            System.out.println("File is empty");
+                        } else {
                             floristShop = loadFloristShop(shopName);
-                            if (floristShop != null) {
-                                floristShop.addTree(floristShop.getStock());
-                                saveFloristShop(floristShop, shopName);
-                            } else {
-                                System.out.println("Floristeria no encontrada");
+                        }
+                        //floristShop = loadFloristShop(shopName);
+                                if (floristShop != null) {
+                                    floristShop.addTree(floristShop.getStock());
+                                    saveFloristShop(floristShop, shopName);
+                                } else {
+                                    System.out.println("Floristeria no encontrada");
+                                }
+
+                            } catch (FileNotFoundException e) {
+                                System.out.println("archivo no encontrado");
+                            } catch (Exception e) {
+                                System.out.println("Floristería no encontrada.");
                             }
 
-                        }catch (FileNotFoundException e) {
-                            System.out.println("archivo no encontrado");
-                        } catch( Exception e){
-                            System.out.println("Floristería no encontrada.");
-                        }
                         break;
 
                     case 3:
@@ -240,7 +248,7 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop.createPurchaseTicket(floristShop.getStock());
-                            saveFloristShop(floristShop,shopName);
+                            saveFloristShop(floristShop, shopName);
                         }
                         break;
                     case 12:
@@ -317,6 +325,11 @@ public class Menu {
         String inputName = Input.readString("Introduce el nombre de la floristería: ");
         FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
         if (floristShop == null) {
+            try {
+                createFile(inputName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             floristShop = new FloristShop(inputName);
             System.out.println("Creada nueva floristería:");
             System.out.println(floristShop.getName());
@@ -352,10 +365,13 @@ public class Menu {
     public static FloristShop loadFloristShop(String shopName) throws FileNotFoundException {
         String filepath = "Data/" + shopName + ".txt";
         FileManager fileManager = new FileManager(filepath, false);
+
+
         return (FloristShop) fileManager.desSerializeObject(filepath);
 
 
     }
+
 
     // Método para guardar una floristería en un archivo
     public static void saveFloristShop(FloristShop floristShop, String shopName) {
@@ -363,6 +379,20 @@ public class Menu {
         FileManager fileManager = new FileManager(filepath, false);
         fileManager.serializeObject(floristShop, filepath);
         System.out.println("Floristería " + shopName + " guardada correctamente.");
+    }
+
+    public static void createFile(String shopName) throws IOException {
+        String filepath = "Data/" + shopName + ".txt";
+        File file = new File(filepath);
+        BufferedWriter bw;
+        if (file.exists()) {
+            System.out.println("El fichero ya existe");
+
+        } else {
+            // El fichero no existe y hay que crearlo
+            bw = new BufferedWriter(new FileWriter(file));
+            bw.close(); // Debe cerrarse la escritura del fichero
+        }
     }
 
 }
