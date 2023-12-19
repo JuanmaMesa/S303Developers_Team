@@ -20,7 +20,23 @@ public class Main {
     }
 
     public static String findFlowerShopString(ArrayList<String> floristShops, String inputName) {
-        int i = 0;
+
+
+
+            /*for (String shopName : floristShops) {
+                if (shopName != null && shopName.equalsIgnoreCase(inputName)) {
+                    return shopName;
+                }
+            }
+            return null;*/
+
+
+
+
+
+
+
+        Integer i = 0;
         String floristShop = null;
         while (floristShop == null && i < floristShops.size()) {
             if (floristShops.get(i).equalsIgnoreCase(inputName)) {
@@ -29,8 +45,8 @@ public class Main {
             i++;
         }
         return floristShop;
-    }
 
+    }
 
     public static FloristShop findFlowerShop(ArrayList<FloristShop> floristShops, String inputName) {
         int i = 0;
