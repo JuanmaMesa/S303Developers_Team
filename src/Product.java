@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Product implements Serializable{
     private static ArrayList<Integer> idProduct = new ArrayList<>();
-
     private static int lastId = 0;
     private int id;
     private String name;
@@ -24,11 +23,11 @@ public class Product implements Serializable{
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getLastId() {
+    public long getLastId() {
         return lastId;
     }
 

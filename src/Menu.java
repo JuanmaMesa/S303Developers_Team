@@ -15,7 +15,6 @@ public class Menu {
                 switch (menu()) {
                     case 1:
                         createFloristShop(floristShops);
-                        floristShops.forEach(n -> System.out.println(n));
                         break;
 
                     case 2:
@@ -306,7 +305,11 @@ public class Menu {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop = loadFloristShop(shopName);
-                            floristShop.getPurchaseTickets(floristShop.getTickets());
+                            if(floristShop.getTickets().isEmpty()){
+                                System.out.println("No se ha hecho ninguna venta.");
+                            }else {
+                                floristShop.getPurchaseTickets(floristShop.getTickets());
+                            }
                         }
                         break;
                     case 13:
@@ -435,7 +438,6 @@ public class Menu {
         String filepath = "Data/" + floristShop.getName() + ".txt";
         FileManager fileManager = new FileManager(filepath, false);
         fileManager.serializeObject(floristShop, filepath);
-        System.out.println("Floristería " + floristShop.getName() + " guardada correctamente.");
     }
 
 
@@ -443,14 +445,10 @@ public class Menu {
         String filepath = "Data/" + shopName + ".txt";
         File file = new File(filepath);
         BufferedWriter bw;
-        //if (file.exists()) {
-          //  System.out.println("El fichero ya existe");
+        // creacion del fichero
+        bw = new BufferedWriter(new FileWriter(file));
+        bw.close();
 
-        //} else {
-            // El fichero no existe y hay que crearlo
-            bw = new BufferedWriter(new FileWriter(file));
-            bw.close();
-      //  }
     }
 
 }

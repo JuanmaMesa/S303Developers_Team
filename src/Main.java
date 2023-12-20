@@ -5,16 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Data data = new Data();
-
-
-        //data.loadProducts();
-        //data.loadShop();
-
         ArrayList<String> floristShops = nameFileTxt();
-        floristShops.forEach( n -> System.out.println(n));
-
-
         Menu.getMainMenu(floristShops);
 
     }
@@ -30,23 +21,6 @@ public class Main {
         return null;
     }
 
-
-
-
-
-
-
-        /*Integer i = 0;
-        String floristShop = null;
-        while (floristShop == null && i < floristShops.size()) {
-            if (floristShops.get(i).equalsIgnoreCase(inputName)) {
-                floristShop = floristShops.get(i);
-            }
-            i++;
-        }
-        return floristShop;
-
-    }*/
 
     public static FloristShop findFlowerShop(ArrayList<FloristShop> floristShops, String inputName) {
         int i = 0;

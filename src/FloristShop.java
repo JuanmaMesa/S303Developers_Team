@@ -243,7 +243,6 @@ public class FloristShop implements Serializable {
     }
 
     public void createPurchaseTicket(ArrayList<Product> stock) {
-        //TODO crear nuevo ticket
         byte option = -1;
         String yesNo = "";
         boolean endPurchase = false;
@@ -253,7 +252,6 @@ public class FloristShop implements Serializable {
         if (!stock.isEmpty()) {
             do {
                 System.out.println("Productos en stock: ");
-                //TODO Linkar con stock de floristShop
                 for (int i = 1; i <= stock.size(); i++) {
                     System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
                 }
@@ -268,7 +266,7 @@ public class FloristShop implements Serializable {
                 stock.remove(stock.get(option - 1));
                 System.out.println("Producto añadido.\n");
                 if (stock.isEmpty()) {
-                    System.out.println("La floristería no tiene stock en estos momentos.");
+                    System.out.println("Actualmente, la floristería no dispone de más productos en stock.");
                     endPurchase = true;
                 } else {
                     do {
@@ -280,19 +278,16 @@ public class FloristShop implements Serializable {
                     }
                 }
             } while (endPurchase == false);
+            ticket.calculateFinalPrice();
+            System.out.println("Compra realizada con exito");
+            System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
+            addTicket(ticket);
+
         }else{
-            System.out.println("No quedan más productos");
+            System.out.println("Actualmente, la floristería no dispone de productos en stock.");
+            System.out.println("Lamentamos las molestias. Vuelva otro día, gracias.");
 
         }
-        ticket.calculateFinalPrice();
-        System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
-        addTicket(ticket);
-
-
-
-
-
-
 
     }
 
@@ -308,7 +303,6 @@ public class FloristShop implements Serializable {
 
     public double getSalesProfits(ArrayList<Ticket> tickets) {
         double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
-        //TODO sysout totalEarns
         return totalEarns;
     }
 

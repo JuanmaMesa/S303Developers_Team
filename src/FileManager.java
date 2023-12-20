@@ -73,8 +73,8 @@ public class FileManager {
     public void serializeObject(FloristShop shops, String filepath) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))){
             out.writeObject(shops);
-            System.out.println("List of shops serialized and saved in " + filepath);
         } catch(IOException e) {
+            System.out.println("Error al serializar la floristshop:");
             e.printStackTrace();
         }
     }
@@ -84,9 +84,9 @@ public class FileManager {
     public Object desSerializeObject(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
             FloristShop shops = (FloristShop) in.readObject();
-            System.out.println("List of shops deserialized from " + filePath);
             return shops;
         } catch(IOException | ClassNotFoundException e) {
+            System.out.println("Error al deserializar la floristshop:");
             e.printStackTrace();
 
             return null;
