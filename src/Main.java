@@ -22,13 +22,13 @@ public class Main {
     public static String findFlowerShopString(ArrayList<String> floristShops, String inputName) {
 
 
-
-            /*for (String shopName : floristShops) {
-                if (shopName != null && shopName.equalsIgnoreCase(inputName)) {
-                    return shopName;
-                }
+        for (String shopName : floristShops) {
+            if (shopName != null && shopName.equalsIgnoreCase(inputName)) {
+                return shopName;
             }
-            return null;*/
+        }
+        return null;
+    }
 
 
 
@@ -36,7 +36,7 @@ public class Main {
 
 
 
-        Integer i = 0;
+        /*Integer i = 0;
         String floristShop = null;
         while (floristShop == null && i < floristShops.size()) {
             if (floristShops.get(i).equalsIgnoreCase(inputName)) {
@@ -46,7 +46,7 @@ public class Main {
         }
         return floristShop;
 
-    }
+    }*/
 
     public static FloristShop findFlowerShop(ArrayList<FloristShop> floristShops, String inputName) {
         int i = 0;
@@ -61,7 +61,7 @@ public class Main {
     }
 
     public static String nameFloristShop() {
-        String shopName = Input.readString("Introduce el nombre de la floristeria: ");
+        String shopName = Input.readString("Introduce el nombre de la floristeria: ").toLowerCase();
 
         return shopName;
     }

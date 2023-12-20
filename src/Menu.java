@@ -15,6 +15,7 @@ public class Menu {
                 switch (menu()) {
                     case 1:
                         createFloristShop(floristShops);
+                        floristShops.forEach(n -> System.out.println(n));
                         break;
 
                     case 2:
@@ -29,11 +30,11 @@ public class Menu {
                                 System.out.println("File is empty");
                                 FloristShop floristShop22 = new FloristShop(shopName);
                                 floristShop22.addTree(floristShop22.getStock());
-                                saveFloristShop(floristShop22, shopName);
+                                saveFloristShop(floristShop22);
                             } else {
                                 floristShop = loadFloristShop(shopName);
                                 floristShop.addTree(floristShop.getStock());
-                                saveFloristShop(floristShop, shopName);
+                                saveFloristShop(floristShop);
                             }
 
 
@@ -45,25 +46,52 @@ public class Menu {
 
                     case 3:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
-                        // floristShop = Main.findFlowerShop(floristShops, shopName);
-                        if (floristShop == null) {
+                         nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
-                            floristShop.addFlower(floristShop.getStock());
-                            saveFloristShop(floristShop, shopName);
+                            File file = new File("Data/" + shopName + ".txt");
+                            try {
+                                if (file.length() == 0L) {
+                                    System.out.println("File is empty");
+                                    FloristShop floristShop22 = new FloristShop(shopName);
+                                    floristShop22.addFlower(floristShop22.getStock());
+                                    saveFloristShop(floristShop22);
+                                } else {
+                                    floristShop = loadFloristShop(shopName);
+                                    floristShop.addFlower(floristShop.getStock());
+                                    saveFloristShop(floristShop);
+                                }
+
+
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                         break;
-
                     case 4:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
-                        // floristShop = Main.findFlowerShop(floristShops, shopName);-> antiguo metodo para cargar datos
-                        if (floristShop == null) {
+                         nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
-                            floristShop.addDecoration(floristShop.getStock());
-                            saveFloristShop(floristShop, shopName);
+                            File file = new File("Data/" + shopName + ".txt");
+                            try {
+                                if (file.length() == 0L) {
+                                    System.out.println("File is empty");
+                                    FloristShop floristShop22 = new FloristShop(shopName);
+                                    floristShop22.addDecoration(floristShop22.getStock());
+                                    saveFloristShop(floristShop22);
+                                } else {
+                                    floristShop = loadFloristShop(shopName);
+                                    floristShop.addDecoration(floristShop.getStock());
+                                    saveFloristShop(floristShop);
+                                }
+
+
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                         break;
 
@@ -95,11 +123,12 @@ public class Menu {
 
                     case 6:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             long treeCount = floristShop.getStock().stream()
                                     .filter(p -> p instanceof Tree)
                                     .count();
@@ -124,7 +153,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeTree(producto);
-                                            saveFloristShop(floristShop, shopName);
+                                            saveFloristShop(floristShop);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -137,15 +166,17 @@ public class Menu {
                                 }
                             }
                         }
+                        saveFloristShop(floristShop);
                         break;
 
                     case 7:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             long flowerCount = floristShop.getStock().stream()
                                     .filter(p -> p instanceof Flower)
                                     .count();
@@ -169,7 +200,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeFlower(producto);
-                                            saveFloristShop(floristShop, shopName);
+                                            saveFloristShop(floristShop);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -182,15 +213,17 @@ public class Menu {
                                 }
                             }
                         }
+                        saveFloristShop(floristShop);
                         break;
 
                     case 8:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             long decorationCount = floristShop.getStock().stream()
                                     .filter(p -> p instanceof Decoration)
                                     .count();
@@ -215,7 +248,7 @@ public class Menu {
                                         String confirm = Input.readString("¿Estas seguro de eliminarlo? Si/NO ");
                                         if (confirm.equalsIgnoreCase("si")) {
                                             floristShop.removeDecoration(producto);
-                                            saveFloristShop(floristShop, shopName);
+                                            saveFloristShop(floristShop);
                                             continueLoop = true;
                                         } else if (confirm.equalsIgnoreCase("no")) {
                                             System.out.println("Operacion cancelada");
@@ -228,57 +261,62 @@ public class Menu {
                                 }
                             }
                         }
+                        saveFloristShop(floristShop);
                         break;
 
                     case 9:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             floristShop.getShopStockWithQuantity();
                         }
                         break;
                     case 10:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             System.out.println("Valor Total del stock: " + floristShop.getTotalValue(floristShop.getStock()) + " €");
                         }
                         break;
                     case 11:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
-                        //floristShop = Main.findFlowerShop(floristShops, shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             floristShop.createPurchaseTicket(floristShop.getStock());
-                            saveFloristShop(floristShop, shopName);
+                            saveFloristShop(floristShop);
                         }
                         break;
                     case 12:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             floristShop.getPurchaseTickets(floristShop.getTickets());
                         }
                         break;
                     case 13:
                         shopName = Main.nameFloristShop();
-                        floristShop = loadFloristShop(shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
 
-                        if (floristShop == null) {
+                        if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
+                            floristShop = loadFloristShop(shopName);
                             System.out.println("Suma total de ventas: " + floristShop.getSalesProfits(floristShop.getTickets()) + " €");
                         }
                         break;
@@ -333,17 +371,23 @@ public class Menu {
     }
 
     public static void createFloristShop(ArrayList<String> floristShops) {
-        String inputName = Input.readString("Introduce el nombre de la floristería: ");
+        String inputName = Input.readString("Introduce el nombre de la floristería: ").toLowerCase();
         String floristShopString = Main.findFlowerShopString(floristShops ,inputName);
 
         //FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
         if (floristShopString == null) {
             FloristShop floristShop = new FloristShop(inputName);
-            System.out.println("Creada nueva floristería:");
-            System.out.println(floristShop.getName());
-            floristShops.add(floristShopString);
+            //Menu.saveFloristShop(floristShop);
+            //System.out.println("Creada nueva floristería:");
+            //System.out.println(floristShop.getName());
+           // floristShops.add(floristShopString);
             try {
                 createFile(inputName);
+
+                Menu.saveFloristShop(floristShop);
+                System.out.println("Creada nueva floristería:");
+                System.out.println(floristShop.getName());
+                floristShops.add(inputName);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -387,12 +431,13 @@ public class Menu {
 
 
     // Método para guardar una floristería en un archivo
-    public static void saveFloristShop(FloristShop floristShop, String shopName) {
-        String filepath = "Data/" + shopName + ".txt";
+    public static void saveFloristShop(FloristShop floristShop) {
+        String filepath = "Data/" + floristShop.getName() + ".txt";
         FileManager fileManager = new FileManager(filepath, false);
         fileManager.serializeObject(floristShop, filepath);
-        System.out.println("Floristería " + shopName + " guardada correctamente.");
+        System.out.println("Floristería " + floristShop.getName() + " guardada correctamente.");
     }
+
 
     public static void createFile(String shopName) throws IOException {
         String filepath = "Data/" + shopName + ".txt";

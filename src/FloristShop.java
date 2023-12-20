@@ -118,7 +118,7 @@ public class FloristShop implements Serializable {
                 } else {
                     System.out.println("El precio debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
@@ -267,19 +267,32 @@ public class FloristShop implements Serializable {
                 ticket.addProduct(stock.get(option - 1));
                 stock.remove(stock.get(option - 1));
                 System.out.println("Producto añadido.\n");
-                do {
-                    yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
-                } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
-
-                if (yesNo.equalsIgnoreCase("n")) {
+                if (stock.isEmpty()) {
+                    System.out.println("La floristería no tiene stock en estos momentos.");
                     endPurchase = true;
+                } else {
+                    do {
+                        yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
+                    } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+
+                    if (yesNo.equalsIgnoreCase("n")) {
+                        endPurchase = true;
+                    }
                 }
             } while (endPurchase == false);
-        } else System.out.println("La floristería no tiene stock en estos momentos.");
+        }else{
+            System.out.println("No quedan más productos");
 
+        }
         ticket.calculateFinalPrice();
         System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
         addTicket(ticket);
+
+
+
+
+
+
 
     }
 
