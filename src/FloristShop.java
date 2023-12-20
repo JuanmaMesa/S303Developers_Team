@@ -140,7 +140,7 @@ public class FloristShop implements Serializable {
                 } else {
                     System.out.println("El precio debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
