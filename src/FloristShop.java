@@ -1,12 +1,13 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import javax.management.ObjectInstance;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class FloristShop {
+public class FloristShop implements Serializable {
     private static int lastId = 0;
     private int id;
     private String name;
@@ -24,6 +25,13 @@ public class FloristShop {
         this.name = name;
         this.stock = stock;
         this.tickets = tickets;
+    }
+    public FloristShop(){
+
+    }
+
+    public static void setLastId(int lastId) {
+      FloristShop.lastId = lastId;
     }
 
     public String getName() {
@@ -107,7 +115,7 @@ public class FloristShop {
                 } else {
                     System.out.println("El precio debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
@@ -165,7 +173,7 @@ public class FloristShop {
         if (stock.isEmpty()) {
             System.out.println("No hay stock en la floristería " + name + ".");
         } else {
-            System.out.println("El stock disponible en la floristería " + name + " es:");
+            System.out.println("\nEl stock disponible en la floristería " + name + " es:\n");
             stock.forEach(product -> System.out.println(product));
         }
     }
@@ -224,14 +232,13 @@ public class FloristShop {
     }
 
     public double getTotalValue(ArrayList<Product> stock) {
-        //TODO valor total stock
+
         double totalValue = stock.stream().mapToDouble(Product::getPrice).sum();
-        // TODO sysout con totalValue
+
         return totalValue;
     }
 
     public void createPurchaseTicket(ArrayList<Product> stock) {
-        //TODO crear nuevo ticket
         byte option = -1;
         String yesNo = "";
         boolean endPurchase = false;
@@ -241,7 +248,6 @@ public class FloristShop {
         if (!stock.isEmpty()) {
             do {
                 System.out.println("Productos en stock: ");
-                //TODO Linkar con stock de floristShop
                 for (int i = 1; i <= stock.size(); i++) {
                     System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
                 }
@@ -255,27 +261,36 @@ public class FloristShop {
                 ticket.addProduct(stock.get(option - 1));
                 stock.remove(stock.get(option - 1));
                 System.out.println("Producto añadido.\n");
-                do {
-                    yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
-                } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
-
-                if (yesNo.equalsIgnoreCase("n")) {
+                if (stock.isEmpty()) {
+                    System.out.println("Actualmente, la floristería no dispone de más productos en stock.");
                     endPurchase = true;
+                } else {
+                    do {
+                        yesNo = Input.readString("Quieres seguir comprando? (S/N): ");
+                    } while (!yesNo.equalsIgnoreCase("s") && !yesNo.equalsIgnoreCase("n"));
+
+                    if (yesNo.equalsIgnoreCase("n")) {
+                        endPurchase = true;
+                    }
                 }
             } while (endPurchase == false);
-        } else System.out.println("La floristería no tiene stock en estos momentos.\n");
+            ticket.calculateFinalPrice();
+            System.out.println("Compra realizada con exito");
+            System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
+            addTicket(ticket);
 
-        ticket.calculateFinalPrice();
-        System.out.println("Precio total ticket: " + ticket.getTotalPrice() + " €");
-        addTicket(ticket);
+        }else{
+            System.out.println("Actualmente, la floristería no dispone de productos en stock.");
+            System.out.println("Lamentamos las molestias. Vuelva otro día, gracias.");
+
+        }
 
     }
 
     public void getPurchaseTickets(ArrayList<Ticket> tickets) {
-        //TODO Linkar con stock de floristShop
 
         for (Ticket t : tickets) {
-            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: ");
+            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: \n");
             t.getProducts().forEach((p) -> System.out.println("- " + p.getName()));
             System.out.println("Precio Total de la compra: " + t.getTotalPrice() + " €\n");
         }
@@ -284,7 +299,6 @@ public class FloristShop {
 
     public double getSalesProfits(ArrayList<Ticket> tickets) {
         double totalEarns = tickets.stream().mapToDouble(Ticket::getTotalPrice).sum();
-        //TODO sysout totalEarns
         return totalEarns;
     }
 
