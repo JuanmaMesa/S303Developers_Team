@@ -64,10 +64,20 @@ public class FloristShop implements Serializable {
     }
 
     public void addTree(ArrayList<Product> stock) {
-        String nameTree = Input.readString("Introduce el nombre del árbol: ");
 
+        String nameTree = "";
         double priceTree = 0.0;
         boolean validPrice = false;
+        boolean validName = false;
+        do{
+            nameTree = Input.readString("Introduce el nombre del árbol: ");
+            if (nameTree.equalsIgnoreCase("")){
+                System.out.println("Opcion no valida");
+            }
+            else validName = true;
+        }while(!validName);
+
+
         while (!validPrice) {
             try {
                 priceTree = Input.readDouble("Introduce el precio del árbol: ");
@@ -80,6 +90,7 @@ public class FloristShop implements Serializable {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
+
 
         double heightTree = 0.0;
         boolean validHeight = false;
@@ -103,10 +114,19 @@ public class FloristShop implements Serializable {
     }
 
     public void addFlower(ArrayList<Product> stock) {
-        String nameFlower = Input.readString("Introduce el nombre de la flor: ");
-
+        String nameFlower;
+        boolean validName = false;
         double priceFlower = 0.0;
         boolean validPrice = false;
+
+        do{
+            nameFlower = Input.readString("Introduce el nombre de la flor: ");
+            if (nameFlower.equalsIgnoreCase("")){
+                System.out.println("Opcion no valida");
+            }
+            else validName = true;
+        }while(!validName);
+
         while (!validPrice) {
             try {
                 priceFlower = Input.readDouble(("Introduce el precio de la flor: "));
@@ -120,7 +140,17 @@ public class FloristShop implements Serializable {
             }
         }
 
-        String colorFlower = Input.readString("Introduce el color de la flor: ");
+        String colorFlower;
+
+        boolean validcolor = false;
+        do{
+            colorFlower = Input.readString("Introduce el color de la flor: ");
+            if (colorFlower.equalsIgnoreCase("")){
+                System.out.println("Opcion no valida");
+            }
+            else validcolor = true;
+        }while(!validcolor);
+
         Flower flower = new Flower(nameFlower, priceFlower, colorFlower);
         stock.add(flower);
 
@@ -128,10 +158,19 @@ public class FloristShop implements Serializable {
     }
 
     public void addDecoration(ArrayList<Product> stock) {
-        String nameDecoration = Input.readString("Introduce el nombre de la decoración: ");
+        String nameDecoration ;
+        boolean validName = false;
 
         double priceDecoration = 0.0;
         boolean validPrice = false;
+        do{
+            nameDecoration = Input.readString("Introduce el nombre de la decoración: ");
+            if (nameDecoration.equalsIgnoreCase("")){
+                System.out.println("Opcion no valida");
+            }
+            else validName = true;
+        }while(!validName);
+
         while (!validPrice) {
             try {
                 priceDecoration = Input.readDouble(("Introduce el precio de la decoración: "));
@@ -247,15 +286,21 @@ public class FloristShop implements Serializable {
 
         if (!stock.isEmpty()) {
             do {
-                System.out.println("Productos en stock: ");
-                for (int i = 1; i <= stock.size(); i++) {
-                    System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
-                }
                 do {
-                    option = Input.readByte("Qué objeto quieres comprar?: ");
-                    if (option < 1 || option > stock.size()) {
-                        System.out.println("Opcion no valida.\n");
+                    System.out.println("Productos en stock: ");
+                    for (int i = 1; i <= stock.size(); i++) {
+                        System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
                     }
+
+                        try{
+                            option = Input.readByte("Qué objeto quieres comprar?: ");
+                            if (option < 1 || option > stock.size()) {
+                                System.out.println("Opcion no valida.\n");
+                            }
+                        }catch(InputMismatchException e){
+                            System.out.println("Opcion no valida\n");
+                        }
+
                 } while (option < 1 || option > stock.size());
 
                 ticket.addProduct(stock.get(option - 1));
@@ -290,7 +335,7 @@ public class FloristShop implements Serializable {
     public void getPurchaseTickets(ArrayList<Ticket> tickets) {
 
         for (Ticket t : tickets) {
-            System.out.println("Ticket ID: " + t.getId() + " tiene los siguientes productos: \n");
+            System.out.println("\nTicket ID: " + t.getId() + " tiene los siguientes productos: ");
             t.getProducts().forEach((p) -> System.out.println("- " + p.getName()));
             System.out.println("Precio Total de la compra: " + t.getTotalPrice() + " €\n");
         }

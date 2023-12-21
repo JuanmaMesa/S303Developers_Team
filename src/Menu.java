@@ -356,9 +356,9 @@ public class Menu {
             System.out.println("13. Ver ganacias de floristería.");
             System.out.println("0.  Salir de la aplicación.\n");
 
+
             try {
                 option = Input.readByte("Introduce una opcion: ");
-                Input.input();
                 if (option < 0 || option > 13) {
                     System.out.println("Opción no válida");
                 }
@@ -367,8 +367,7 @@ public class Menu {
                 System.out.println("Opcion no valida");
             }
 
-        } while (option < 0 || option > 13);
-
+        } while (!numCorrect);
         return option;
     }
 
