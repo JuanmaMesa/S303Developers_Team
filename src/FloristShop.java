@@ -57,14 +57,11 @@ public class FloristShop implements Serializable {
                 .filter(n -> n.getId() == (id_product))
                 .findFirst()
                 .orElse(null);
-
     }
 
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
-
     }
-
 
     public void addTree(ArrayList<Product> stock) {
         String nameTree = Input.readString("Introduce el nombre del árbol: ");
@@ -143,7 +140,7 @@ public class FloristShop implements Serializable {
                 } else {
                     System.out.println("El precio debe ser mayor o igual a cero.");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Por favor, introduce un número válido para el precio.");
             }
         }
@@ -209,7 +206,6 @@ public class FloristShop implements Serializable {
             System.out.println("El producto asignado no es una decoracion.");
         }
     }
-
 
     public void getShopStockWithQuantity() {
         int indiceTree = 0;
@@ -311,9 +307,7 @@ public class FloristShop implements Serializable {
                 .filter(p -> product.isInstance(p))
                 .forEach(System.out::println);
 
-
     }
-
 
     @Override
     public String toString() {

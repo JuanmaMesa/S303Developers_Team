@@ -19,33 +19,33 @@ public class Menu {
 
                     case 2:
                         shopName = Main.nameFloristShop();
-                        String nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        String nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             File file = new File("Data/" + shopName + ".txt");
-                        try {
-                            if (file.length() == 0L) {
-                                System.out.println("File is empty");
-                                FloristShop floristShop22 = new FloristShop(shopName);
-                                floristShop22.addTree(floristShop22.getStock());
-                                saveFloristShop(floristShop22);
-                            } else {
-                                floristShop = loadFloristShop(shopName);
-                                floristShop.addTree(floristShop.getStock());
-                                saveFloristShop(floristShop);
+                            try {
+                                if (file.length() == 0L) {
+                                    System.out.println("File is empty");
+                                    FloristShop floristShop22 = new FloristShop(shopName);
+                                    floristShop22.addTree(floristShop22.getStock());
+                                    saveFloristShop(floristShop22);
+                                } else {
+                                    floristShop = loadFloristShop(shopName);
+                                    floristShop.addTree(floristShop.getStock());
+                                    saveFloristShop(floristShop);
+                                }
+
+
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
                             }
-
-
-                        } catch (FileNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
                         }
                         break;
 
                     case 3:
                         shopName = Main.nameFloristShop();
-                         nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
@@ -70,7 +70,7 @@ public class Menu {
                         break;
                     case 4:
                         shopName = Main.nameFloristShop();
-                         nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
@@ -119,10 +119,9 @@ public class Menu {
                         break;
 
 
-
                     case 6:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -170,7 +169,7 @@ public class Menu {
 
                     case 7:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -217,7 +216,7 @@ public class Menu {
 
                     case 8:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -265,7 +264,7 @@ public class Menu {
 
                     case 9:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -276,7 +275,7 @@ public class Menu {
                         break;
                     case 10:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -287,7 +286,7 @@ public class Menu {
                         break;
                     case 11:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -299,22 +298,22 @@ public class Menu {
                         break;
                     case 12:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
                         } else {
                             floristShop = loadFloristShop(shopName);
-                            if(floristShop.getTickets().isEmpty()){
+                            if (floristShop.getTickets().isEmpty()) {
                                 System.out.println("No se ha hecho ninguna venta.");
-                            }else {
+                            } else {
                                 floristShop.getPurchaseTickets(floristShop.getTickets());
                             }
                         }
                         break;
                     case 13:
                         shopName = Main.nameFloristShop();
-                        nameFloristShop = Main.findFlowerShopString(floristShops,shopName);
+                        nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
                         if (nameFloristShop == null) {
                             System.out.println("Floristería no encontrada.");
@@ -375,27 +374,25 @@ public class Menu {
 
     public static void createFloristShop(ArrayList<String> floristShops) {
         String inputName = Input.readString("Introduce el nombre de la floristería: ").toLowerCase();
-        String floristShopString = Main.findFlowerShopString(floristShops ,inputName);
+        String floristShopString = Main.findFlowerShopString(floristShops, inputName);
 
-        //FloristShop floristShop = Main.findFlowerShop(floristShops, inputName);
-        if (floristShopString == null) {
-            FloristShop floristShop = new FloristShop(inputName);
-            //Menu.saveFloristShop(floristShop);
-            //System.out.println("Creada nueva floristería:");
-            //System.out.println(floristShop.getName());
-           // floristShops.add(floristShopString);
-            try {
-                createFile(inputName);
-
-                Menu.saveFloristShop(floristShop);
-                System.out.println("Creada nueva floristería:");
-                System.out.println(floristShop.getName());
-                floristShops.add(inputName);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        if (inputName.equalsIgnoreCase("")) {
+            System.out.println("Nombre no válido.");
+        }else{
+            if (floristShopString == null) {
+                FloristShop floristShop = new FloristShop(inputName);
+                try {
+                    createFile(inputName);
+                    Menu.saveFloristShop(floristShop);
+                    System.out.println("Creada nueva floristería:");
+                    System.out.println(floristShop.getName());
+                    floristShops.add(inputName);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println("Ya existe una floristería con el nombre " + floristShopString + ".");
             }
-        } else {
-            System.out.println("Ya existe una floristería con el nombre " + floristShopString + ".");
         }
     }
 
