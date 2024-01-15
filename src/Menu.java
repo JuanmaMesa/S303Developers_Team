@@ -18,6 +18,7 @@ public class Menu {
                         break;
 
                     case 2:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         String nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
@@ -44,6 +45,7 @@ public class Menu {
                         break;
 
                     case 3:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
@@ -69,6 +71,7 @@ public class Menu {
                         }
                         break;
                     case 4:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
                         if (nameFloristShop == null) {
@@ -95,6 +98,7 @@ public class Menu {
                         break;
 
                     case 5:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -120,6 +124,7 @@ public class Menu {
 
 
                     case 6:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -168,6 +173,7 @@ public class Menu {
                         break;
 
                     case 7:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -215,6 +221,7 @@ public class Menu {
                         break;
 
                     case 8:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -263,6 +270,7 @@ public class Menu {
                         break;
 
                     case 9:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -274,6 +282,7 @@ public class Menu {
                         }
                         break;
                     case 10:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -285,6 +294,7 @@ public class Menu {
                         }
                         break;
                     case 11:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -297,6 +307,7 @@ public class Menu {
                         }
                         break;
                     case 12:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -312,6 +323,7 @@ public class Menu {
                         }
                         break;
                     case 13:
+                        toWatchFloristShop(floristShops);
                         shopName = Main.nameFloristShop();
                         nameFloristShop = Main.findFlowerShopString(floristShops, shopName);
 
@@ -415,6 +427,12 @@ public class Menu {
 
         return option;
     }
+    public static void toWatchFloristShop(ArrayList<String> floristShops){
+        System.out.println("--- Floristerias disponibles ---");
+        floristShops.forEach(System.out::println);
+    }
+
+
 
 
     // Método para cargar una floristería desde un archivo
