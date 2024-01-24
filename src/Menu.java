@@ -14,6 +14,7 @@ public class Menu {
             try {
                 switch (menu()) {
                     case 1:
+                        toWatchFloristShop(floristShops);
                         createFloristShop(floristShops);
                         break;
 
