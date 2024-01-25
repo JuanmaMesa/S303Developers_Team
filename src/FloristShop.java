@@ -291,7 +291,8 @@ public class FloristShop implements Serializable {
                     for (int i = 1; i <= stock.size(); i++) {
                         System.out.println(i + ". " + stock.get(i - 1).getName() + " " + stock.get(i - 1).getPrice() + " €");
                     }
-
+                    System.out.println("Cancelar compra:");
+                    System.out.println("0. Salir.");
                         try{
                             option = Input.readByte("Qué objeto quieres comprar?: ");
                             if (option < 1 || option > stock.size()) {
@@ -301,11 +302,12 @@ public class FloristShop implements Serializable {
                             System.out.println("Opcion no valida\n");
                         }
 
-                } while (option < 1 || option > stock.size());
-
-                ticket.addProduct(stock.get(option - 1));
-                stock.remove(stock.get(option - 1));
-                System.out.println("Producto añadido.\n");
+                } while (option < 0 || option > stock.size());
+                if (option > 0) {
+                    ticket.addProduct(stock.get(option - 1));
+                    stock.remove(stock.get(option - 1));
+                    System.out.println("Producto añadido.\n");
+                }
                 if (stock.isEmpty()) {
                     System.out.println("Actualmente, la floristería no dispone de más productos en stock.");
                     endPurchase = true;

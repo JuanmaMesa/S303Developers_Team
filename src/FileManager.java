@@ -83,8 +83,7 @@ public class FileManager {
 
     public Object desSerializeObject(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
-            FloristShop shops = (FloristShop) in.readObject();
-            return shops;
+            return in.readObject();
         } catch(IOException | ClassNotFoundException e) {
             System.out.println("Error al deserializar la floristshop:");
             e.printStackTrace();
